@@ -1,64 +1,45 @@
-# FDSI-gp05-seminario-ciberseguridad-ia
-Seminario Aplicado de Ciberseguridad en IA (FDSI/SPTI 2026-2) — Grupo GP-05. Comparación de arquitectura Unsecure vs. Secure para un asistente académico con RAG, evaluando denegación de servicio y consumo económico (tokens) mediante rate limiting, cuotas, caché y límites de contexto
-# FDSI-GP-05 · Seminario Aplicado de Ciberseguridad en IA
+# FDSI-GP-05: Seminario de Ciberseguridad en IA
 
-Repositorio de trabajo del equipo **GP-05** para el Seminario Aplicado de Ciberseguridad en IA (FDSI / SPTI · ECI · 2026-2).
-
-**Tema asignado:** Denegación de servicio y consumo económico en aplicaciones basadas en LLM.
+Repo del equipo GP-05 para el Seminario Aplicado de Ciberseguridad en IA (FDSI/SPTI, 2026-2). Nos tocó el tema de denegación de servicio y consumo económico en aplicaciones con LLM.
 
 ## Equipo
 
-| Integrante | GitHub |
-|---|---|
-| Mabel Bernal | [@MabelBernalAmaya](https://github.com/MabelBernalAmaya) |
-| Juan Pablo Vélez | |
-| Esteban Caicedo | |
-| Nicolás Prieto | |
+Mabel Bernal, Juan Pablo Vélez, Esteban Caicedo, Nicolás Prieto.
 
-## De qué se trata el proyecto
+## De qué va esto
 
-Vamos a comparar dos versiones de un **asistente académico basado en LLM con RAG** (responde preguntas de estudiantes consultando documentos del curso):
+La idea del reto es mostrar qué pasa cuando una app con LLM no tiene ningún control sobre cuánto puede pedir un usuario. Y comparar eso contra la misma app pero con controles encima.
 
-- **Unsecure:** sin ningún control. Cualquiera puede mandar todas las preguntas que quiera, sin límite de tamaño de contexto, sin cuota y sin caché.
-- **Secure:** con rate limiting por usuario, cuota diaria de tokens, caché de respuestas frecuentes, límite al contexto que se recupera por RAG, y timeout/circuit breaker hacia el LLM.
+Escogimos como caso un asistente que responde preguntas de estudiantes buscando en los documentos del curso, como reglamentos y guías. Lo primero que se nos ocurrió fue lo más simple: pegarle al LLM todo el material del curso directo en el prompt. Pero no tiene sentido. Ni cabe todo en el contexto ni sale barato mandar lo mismo una y otra vez. Por eso usamos RAG. El sistema busca solo los documentos que tienen que ver con la pregunta y le manda al modelo solo esos, no todo el temario.
 
-La idea es demostrar, con pruebas reproducibles y métricas concretas, que esos controles bajan el consumo de tokens y evitan que el servicio se sature — sin dañar la experiencia de un usuario que lo use de forma normal.
+El problema es que ese buscar y mandar contexto tampoco tiene límite. Si alguien pregunta algo como "resume todo el curso", el sistema igual termina trayendo un montón de documentos de una sola vez y el gasto se dispara.
 
-La lógica que debemos poder explicar en cualquier momento:
+Vamos a armar dos versiones. La Unsecure no tiene ningún control: cualquiera pregunta lo que quiera las veces que quiera. La Secure sí tiene límite de peticiones por usuario, tope diario de tokens, caché para no repetir respuestas ya dadas y límite a cuántos documentos puede traer el RAG por consulta.
 
-```
-Problema → Arquitectura Unsecure → Prueba → Evidencia → Control → Arquitectura Secure → Métrica
-```
+## Hitos
 
-## Hoja de ruta
-
-| Fecha | Hito | Entrega |
+| Fecha | Qué toca | Estado |
 |---|---|---|
-| 05/09/2026 | Hito 1 · Propuesta estructurada | PDF de la propuesta técnica ✅ |
-| 12/09/2026 | Hito 2 · Entrega preliminar | Arquitecturas + PPT técnico + plan de pruebas + criterios + video demo preliminar |
-| 26/09/2026 | Hito 3 · Entrega final (Corte 2) | Demo completa + paper formato IEEE + presentación + sustentación |
-| 14/11/2026 | Seminario final | Sustentación (solo los 2 mejores proyectos entre FDSI y SPTI) |
+| 05/09 | Propuesta estructurada | Entregada |
+| 12/09 | Arquitecturas + PPT + plan de pruebas + video | No se entregó |
+| 26/09 | Demo completa + paper IEEE + sustentación | En proceso |
+| 14/11 | Sustentación final, si quedamos entre los 2 mejores | Pendiente |
 
-## Estructura del repo (irá creciendo con cada hito)
+## Estructura
 
 ```
-├── docs/
-│   └── Propuesta_Estructurada_FDSI-GP-05.pdf
-├── diagrams/
-│   ├── unsecure.png
-│   └── secure.png
-├── unsecure/      # implementación de la arquitectura sin controles (Hito 2)
-├── secure/        # implementación de la arquitectura con controles (Hito 2)
-├── tests/         # scripts de las pruebas T01-T05 (Hito 2)
-└── README.md
+docs/       -> propuesta y avances
+diagrams/   -> los dos diagramas de arquitectura
+common/     -> código compartido (búsqueda RAG, llamada al LLM)
+unsecure/   -> la versión sin controles
+secure/     -> la versión con controles
+tests/      -> los scripts de las pruebas
 ```
 
-> **Estado actual:** solo tenemos la propuesta estructurada (Hito 1). Todavía no hay nada implementado — eso empieza para el Hito 2.
+## Tecnologías
 
-## Tecnologías previstas
+Python con FastAPI para el backend. Redis para el rate limiter y la caché, contando tokens reales con `tiktoken` en vez de solo peticiones. Locust para simular carga. Pensamos meter también vLLM para optimizar la parte de inferencia, pero necesita GPU y no tenemos. Nos quedamos con algo que sí corra en una laptop normal.
 
-Python (FastAPI) · LLM vía API o modelo local (Ollama) · Chroma/FAISS + embeddings para el RAG · Redis (rate limiting, cuotas, caché) · tiktoken · Locust/scripts propios para simular carga · Docker.
+## Uso de IA
 
-## Declaración de uso de IA
-
-Se usó Claude (Anthropic) como apoyo para redactar la propuesta estructurada, generar los diagramas preliminares de arquitectura y organizar este README, siguiendo la plantilla y los lineamientos del curso. Todo el contenido fue revisado y ajustado por el equipo.
+Usamos Claude para ayudarnos a organizar la propuesta y pensar la arquitectura. Las decisiones y el contenido final los revisamos y ajustamos nosotros como equipo.
