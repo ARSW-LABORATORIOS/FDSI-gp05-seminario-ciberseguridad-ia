@@ -1,8 +1,12 @@
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from knowledge import search
+
+AQUI = Path(__file__).parent
 
 app = FastAPI(title="Chatbot – Denial of Wallet")
 
@@ -20,10 +24,16 @@ class Question(BaseModel):
 
 @app.get("/")
 def index():
-    return FileResponse("index.html")
+    # ruta absoluta para que funcione aunque uvicorn se lance desde otra carpeta
+    return FileResponse(AQUI / "index.html")
+
+
+@app.get("/health")
+def health():
+    """Lo usa la interfaz para mostrar si el servidor está conectado."""
+    return {"status": "ok"}
 
 
 @app.post("/ask")
 def ask(q: Question):
-    answer = search(q.message)
-    return {"answer": answer}
+    return search(q.message)

@@ -1,9 +1,11 @@
+import re
+
 DOCS = [
     # ── ARQUITECTURA DE SOFTWARE ──────────────────────────────────────────
     {
         "materia": "Arquitectura de Software",
         "tipo": "Syllabus",
-        "keywords": ["arquitectura", "syllabus", "programa", "corte", "notas", "evaluacion", "evaluación"],
+        "keywords": ["arquitectura", "software"],
         "contenido": (
             "Syllabus – Arquitectura de Software\n"
             "Corte 1 (30%): Introducción a estilos arquitectónicos, taller de diagramas C4.\n"
@@ -177,9 +179,58 @@ DEFAULT = (
 )
 
 
-def search(question: str) -> str:
+# Palabras que indican QUÉ tipo de documento se pide (no de qué materia).
+# Antes "syllabus" estaba en las keywords del primer documento, así que cualquier
+# pregunta con "syllabus" devolvía el de Arquitectura sin importar la materia.
+TIPOS = {
+    "Syllabus": ["syllabus", "programa", "corte", "notas", "evaluacion", "evaluación", "parcial", "docente", "horario", "salon", "salón"],
+    "Apuntes": ["apuntes", "resumen", "concepto", "teoria", "teoría", "que es", "qué es", "explica", "define", "definicion", "definición"],
+    "Taller": ["taller", "ejercicio", "actividad"],
+    "Guía": ["guia", "guía", "laboratorio", "practica", "práctica", "ensayo"],
+}
+# si la materia no tiene el tipo pedido, se usa el equivalente (talleres y guías)
+EQUIVALENTE = {"Taller": "Guía", "Guía": "Taller"}
+
+
+def _contiene(texto: str, palabra: str) -> bool:
+    # coincide al inicio de una palabra: "derivadas" activa "derivada",
+    # pero "independencia" no activa "cia"
+    return re.search(r"(?<!\w)" + re.escape(palabra), texto) is not None
+
+
+def _tipo_pedido(q: str):
+    for tipo, palabras in TIPOS.items():
+        if any(_contiene(q, p) for p in palabras):
+            return tipo
+    return None
+
+
+def search(question: str) -> dict:
+    """Elige la materia con más coincidencias y, dentro de ella, el tipo de documento pedido."""
     q = question.lower()
-    for doc in DOCS:
-        if any(kw in q for kw in doc["keywords"]):
-            return f"📚 {doc['materia']} — {doc['tipo']}\n\n{doc['contenido']}"
-    return DEFAULT
+    puntaje_doc = [sum(len(kw) for kw in doc["keywords"] if _contiene(q, kw)) for doc in DOCS]
+
+    puntaje_materia = {}
+    for doc, puntaje in zip(DOCS, puntaje_doc):
+        puntaje_materia[doc["materia"]] = puntaje_materia.get(doc["materia"], 0) + puntaje
+    materia = max(puntaje_materia, key=puntaje_materia.get)
+    if puntaje_materia[materia] == 0:
+        return {"answer": DEFAULT, "materia": None, "tipo": None, "contenido": None}
+
+    candidatos = [(doc, p) for doc, p in zip(DOCS, puntaje_doc) if doc["materia"] == materia]
+    tipo = _tipo_pedido(q)
+    elegido = next((d for d, _ in candidatos if d["tipo"] == tipo), None)
+    if elegido is None and tipo in EQUIVALENTE:
+        elegido = next((d for d, _ in candidatos if d["tipo"] == EQUIVALENTE[tipo]), None)
+    if elegido is None:
+        # sin tipo pedido gana la coincidencia más específica; el syllabus solo tiene
+        # palabras de la materia ("historia", "arquitectura"), así que va de último
+        especificos = [(d, p) for d, p in candidatos if p > 0 and d["tipo"] != "Syllabus"]
+        elegido = max(especificos, key=lambda c: c[1])[0] if especificos else candidatos[0][0]
+
+    return {
+        "answer": f"📚 {elegido['materia']} — {elegido['tipo']}\n\n{elegido['contenido']}",
+        "materia": elegido["materia"],
+        "tipo": elegido["tipo"],
+        "contenido": elegido["contenido"],
+    }

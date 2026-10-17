@@ -8,4 +8,4 @@
 
 Igual que en unsecure, faltan los TODO (documentos reales y API del LLM).
 
-Ver diagrama en `/diagrams/secure.png`.
+Ver diagrama en `/diagrams/secure.png`. Ese diagrama muestra la arquitectura objetivo del ADR-001 (Google Cloud con Cloud Armor, Apigee AI Gateway y zona privada); este código es la versión de laboratorio que la simula para medir. Los diagramas se regeneran con `python diagrams/generar_diagramas.py`.
