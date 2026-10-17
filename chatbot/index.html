@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asistente Académico</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header {
+      background: #1e293b;
+      padding: 14px 20px;
+      border-bottom: 1px solid #334155;
+    }
+
+    header h1 { font-size: 1rem; font-weight: 600; color: #f8fafc; }
+    header p  { font-size: 0.75rem; color: #94a3b8; margin-top: 2px; }
+
+    #chat {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .msg {
+      max-width: 75%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    .msg.user {
+      background: #3b82f6;
+      color: #fff;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+
+    .msg.bot {
+      background: #1e293b;
+      color: #e2e8f0;
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+      border: 1px solid #334155;
+    }
+
+    .msg.bot strong { color: #93c5fd; }
+
+    .tag {
+      font-size: 0.7rem;
+      background: #0f172a;
+      color: #64748b;
+      border-radius: 4px;
+      padding: 2px 6px;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+
+    .typing {
+      background: #1e293b;
+      border: 1px solid #334155;
+      align-self: flex-start;
+      padding: 10px 16px;
+      border-radius: 12px;
+      border-bottom-left-radius: 4px;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      color: #64748b;
+    }
+
+    .suggestions {
+      padding: 10px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      background: #0f172a;
+      border-top: 1px solid #1e293b;
+    }
+
+    .chip {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 20px;
+      padding: 5px 12px;
+      font-size: 0.75rem;
+      color: #94a3b8;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .chip:hover { border-color: #3b82f6; color: #93c5fd; }
+
+    #form {
+      display: flex;
+      gap: 8px;
+      padding: 14px 20px;
+      background: #1e293b;
+      border-top: 1px solid #334155;
+    }
+
+    #input {
+      flex: 1;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #e2e8f0;
+      font-size: 0.875rem;
+      outline: none;
+    }
+
+    #input:focus { border-color: #3b82f6; }
+
+    button {
+      background: #3b82f6;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 0.875rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    button:hover { background: #2563eb; }
+    button:disabled { background: #334155; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🎓 Asistente Académico</h1>
+  <p>Consulta syllabus, apuntes, talleres y guías de tus materias</p>
+</header>
+
+<div id="chat"></div>
+
+<div class="suggestions">
+  <span class="chip" onclick="send('syllabus de Arquitectura de Software')">📐 Syllabus Arquitectura</span>
+  <span class="chip" onclick="send('apuntes de patrones arquitectónicos')">📐 Apuntes Arquitectura</span>
+  <span class="chip" onclick="send('syllabus de Fundamentos de Seguridad de la Información')">🔐 Syllabus Seguridad</span>
+  <span class="chip" onclick="send('apuntes de CIA y OWASP')">🔐 Apuntes Seguridad</span>
+  <span class="chip" onclick="send('syllabus de matemáticas')">📊 Syllabus Matemáticas</span>
+  <span class="chip" onclick="send('apuntes de derivadas')">📊 Apuntes Matemáticas</span>
+  <span class="chip" onclick="send('syllabus de Historia de Colombia')">🏛️ Syllabus Historia</span>
+  <span class="chip" onclick="send('apuntes de independencia de Colombia')">🏛️ Apuntes Historia</span>
+</div>
+
+<form id="form" onsubmit="handleSubmit(event)">
+  <input id="input" type="text" placeholder="Ej: taller de arquitectura, guía de seguridad..." autocomplete="off" />
+  <button id="btn" type="submit">Enviar</button>
+</form>
+
+<script>
+  const chat = document.getElementById('chat');
+  const input = document.getElementById('input');
+  const btn = document.getElementById('btn');
+
+  function renderText(text) {
+    return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  }
+
+  function addMsg(text, role) {
+    const div = document.createElement('div');
+    div.className = `msg ${role}`;
+    div.innerHTML = renderText(text);
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  function addTyping() {
+    const div = document.createElement('div');
+    div.className = 'typing';
+    div.textContent = '···';
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+    return div;
+  }
+
+  async function send(text) {
+    const msg = text || input.value.trim();
+    if (!msg) return;
+    input.value = '';
+    btn.disabled = true;
+
+    addMsg(msg, 'user');
+    const typing = addTyping();
+
+    try {
+      const res = await fetch('/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: msg })
+      });
+      const data = await res.json();
+      typing.remove();
+      addMsg(data.answer, 'bot');
+    } catch {
+      typing.remove();
+      addMsg('Error al conectar con el servidor.', 'bot');
+    }
+
+    btn.disabled = false;
+    input.focus();
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    send();
+  }
+
+  addMsg('¡Hola! Soy tu asistente académico 👋\n\nPuedo ayudarte con **Arquitectura de Software**, **Fundamentos de Seguridad de la Información**, **Matemáticas Básicas** e **Historia de Colombia**.\n\nPregúntame por el syllabus, apuntes, talleres o guías de cualquier materia.', 'bot');
+</script>
+
+</body>
+</html>
