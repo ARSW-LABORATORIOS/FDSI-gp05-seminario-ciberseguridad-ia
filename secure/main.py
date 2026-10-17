@@ -25,7 +25,9 @@ MAX_CHUNKS_RAG = 5  # tope a cuántos documentos se pueden traer por consulta
 
 class Pregunta(BaseModel):
     texto: str
-    usuario_id: str  # acá en un caso real vendría del token de login (JWT), no del body
+    # débil a propósito: se puede rotar para saltarse la cuota. En el ADR-001 la identidad
+    # sale del `sub` de una sesión anónima firmada (tras reCAPTCHA) que valida el gateway.
+    usuario_id: str
 
 
 @app.post("/ask")
