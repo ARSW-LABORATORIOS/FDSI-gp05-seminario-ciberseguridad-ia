@@ -1,0 +1,40 @@
+name: Seguridad estática - SAST y secretos
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  sast:
+    name: Semgrep (SAST)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Instalar Semgrep
+        run: python -m pip install --upgrade semgrep
+      - name: Análisis con reglas comunitarias
+        run: semgrep scan --config p/owasp-top-ten --config p/secrets --json --output semgrep.json || true
+      - name: Publicar evidencia
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultado-semgrep
+          path: semgrep.json
+          if-no-files-found: warn
+  secretos:
+    name: Gitleaks (secret scanning)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Detección de secretos
+        uses: gitleaks/gitleaks-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # En repositorios de organizaciones puede requerirse GITLEAKS_LICENSE.
