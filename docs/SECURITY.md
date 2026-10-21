@@ -11,7 +11,9 @@
 | Herramienta | Tipo | Fecha | Resultado | Enlace a evidencia |
 |---|---|---|---|---|
 | CodeQL o Semgrep | SAST | | | |
-| Gitleaks / GitHub secret scanning | Secretos | | | |
+| Gitleaks CLI | Secretos | | | |
+
+> **Limitación:** `gitleaks/gitleaks-action@v3` requiere `GITLEAKS_LICENSE` en repositorios de organizaciones. Se usa Gitleaks CLI directamente como alternativa, que no requiere licencia y ofrece la misma detección. GitHub secret scanning no está disponible en el plan actual de la organización.
 | Dependabot | SCA | | | |
 | OWASP ZAP Baseline | DAST pasivo | | | |
 

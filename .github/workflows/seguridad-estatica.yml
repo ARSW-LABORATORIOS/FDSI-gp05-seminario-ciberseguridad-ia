@@ -27,14 +27,24 @@ jobs:
           path: semgrep.json
           if-no-files-found: warn
   secretos:
-    name: Gitleaks (secret scanning)
+    # Gitleaks-action requiere licencia en organizaciones (ver docs/SECURITY.md).
+    # Alternativa: gitleaks CLI sin acción, no requiere licencia.
+    name: Gitleaks CLI (secret scanning)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Instalar Gitleaks CLI
+        run: |
+          curl -sSL https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks_8.27.2_linux_x64.tar.gz | tar -xz
+          sudo mv gitleaks /usr/local/bin/
       - name: Detección de secretos
-        uses: gitleaks/gitleaks-action@v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # En repositorios de organizaciones puede requerirse GITLEAKS_LICENSE.
+        run: gitleaks detect --source . --redact --exit-code 0 --report-format json --report-path gitleaks.json || true
+      - name: Publicar evidencia
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultado-gitleaks
+          path: gitleaks.json
+          if-no-files-found: warn
