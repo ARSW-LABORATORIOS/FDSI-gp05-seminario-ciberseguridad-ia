@@ -8,6 +8,8 @@
 - Fuera de alcance: producción, sistemas de terceros, datos reales y pruebas destructivas.
 
 ## 2. Línea base y herramientas
+
+![Vulnerabilidades Dependabot](images/vulnerabilidades-dependabot.png)
 | Herramienta | Tipo | Fecha | Resultado | Enlace a evidencia |
 |---|---|---|---|---|
 | CodeQL o Semgrep | SAST | | | |
