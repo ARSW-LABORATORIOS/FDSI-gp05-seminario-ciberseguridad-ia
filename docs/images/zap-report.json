@@ -1,0 +1,537 @@
+{
+	"@programName": "ZAP",
+	"@version": "2.17.0",
+	"@generated": "Tue, 3 Nov 2026 23:51:58",
+	"created": "2026-11-03T23:51:58.584986876Z",
+	"insights":[
+		{
+			"level": "Info",
+			"reason": "Informational",
+			"site": "http://192.168.0.23:8000",
+			"key": "insight.code.2xx",
+			"description": "Percentage of responses with status code 2xx",
+			"statistic": "60"
+		},
+		{
+			"level": "Info",
+			"reason": "Informational",
+			"site": "http://192.168.0.23:8000",
+			"key": "insight.code.4xx",
+			"description": "Percentage of responses with status code 4xx",
+			"statistic": "40"
+		},
+		{
+			"level": "Info",
+			"reason": "Informational",
+			"site": "http://192.168.0.23:8000",
+			"key": "insight.endpoint.ctype.application/json",
+			"description": "Percentage of endpoints with content type application/json",
+			"statistic": "66"
+		},
+		{
+			"level": "Info",
+			"reason": "Informational",
+			"site": "http://192.168.0.23:8000",
+			"key": "insight.endpoint.ctype.text/html",
+			"description": "Percentage of endpoints with content type text/html",
+			"statistic": "33"
+		},
+		{
+			"level": "Info",
+			"reason": "Informational",
+			"site": "http://192.168.0.23:8000",
+			"key": "insight.endpoint.method.GET",
+			"description": "Percentage of endpoints with method GET",
+			"statistic": "100"
+		},
+		{
+			"level": "Info",
+			"reason": "Informational",
+			"site": "http://192.168.0.23:8000",
+			"key": "insight.endpoint.total",
+			"description": "Count of total endpoints",
+			"statistic": "3"
+		},
+		{
+			"level": "Info",
+			"reason": "Informational",
+			"site": "http://192.168.0.23:8000",
+			"key": "insight.response.slow",
+			"description": "Percentage of slow responses",
+			"statistic": "20"
+		}
+	],
+	"site":[ 
+		{
+			"@name": "http://192.168.0.23:8000",
+			"@host": "192.168.0.23",
+			"@port": "8000",
+			"@ssl": "false",
+			"alerts": [ 
+				{
+					"pluginid": "10038",
+					"alertRef": "10038-1",
+					"alert": "Content Security Policy (CSP) Header Not Set",
+					"name": "Content Security Policy (CSP) Header Not Set",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "Medium (High)",
+					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
+					"instances":[ 
+						{
+							"id": "5",
+							"uri": "http://192.168.0.23:8000",
+							"nodeName": "http:\/\/192.168.0.23:8000",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "4",
+							"uri": "http://192.168.0.23:8000/",
+							"nodeName": "http:\/\/192.168.0.23:8000\/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "2",
+					"systemic": false,
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP</p><p>https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</p><p>https://www.w3.org/TR/CSP/</p><p>https://w3c.github.io/webappsec-csp/</p><p>https://web.dev/articles/csp</p><p>https://caniuse.com/#feat=contentsecuritypolicy</p><p>https://content-security-policy.com/</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10020",
+					"alertRef": "10020-1",
+					"alert": "Missing Anti-clickjacking Header",
+					"name": "Missing Anti-clickjacking Header",
+					"riskcode": "2",
+					"confidence": "2",
+					"riskdesc": "Medium (Medium)",
+					"desc": "<p>The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options.</p>",
+					"instances":[ 
+						{
+							"id": "1",
+							"uri": "http://192.168.0.23:8000",
+							"nodeName": "http:\/\/192.168.0.23:8000",
+							"method": "GET",
+							"param": "x-frame-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "2",
+							"uri": "http://192.168.0.23:8000/",
+							"nodeName": "http:\/\/192.168.0.23:8000\/",
+							"method": "GET",
+							"param": "x-frame-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "2",
+					"systemic": false,
+					"solution": "<p>Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP headers. Ensure one of them is set on all web pages returned by your site/app.</p><p>If you expect the page to be framed only by pages on your server (e.g. it's part of a FRAMESET) then you'll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY. Alternatively consider implementing Content Security Policy's \"frame-ancestors\" directive.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Frame-Options</p>",
+					"cweid": "1021",
+					"wascid": "15",
+					"sourceid": "7"
+				},
+				{
+					"pluginid": "90003",
+					"alertRef": "90003",
+					"alert": "Sub Resource Integrity Attribute Missing",
+					"name": "Sub Resource Integrity Attribute Missing",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "Medium (High)",
+					"desc": "<p>The integrity attribute is missing on a script or link tag served by an external server. The integrity tag prevents an attacker who have gained access to this server from injecting a malicious content.</p>",
+					"instances":[ 
+						{
+							"id": "14",
+							"uri": "http://192.168.0.23:8000",
+							"nodeName": "http:\/\/192.168.0.23:8000",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap\" rel=\"stylesheet\" />",
+							"otherinfo": ""
+						},
+						{
+							"id": "15",
+							"uri": "http://192.168.0.23:8000/",
+							"nodeName": "http:\/\/192.168.0.23:8000\/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap\" rel=\"stylesheet\" />",
+							"otherinfo": ""
+						}
+					],
+					"count": "2",
+					"systemic": false,
+					"solution": "<p>Provide a valid integrity attribute to the tag.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity</p>",
+					"cweid": "345",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "90004",
+					"alertRef": "90004-2",
+					"alert": "Cross-Origin-Embedder-Policy Header Missing or Invalid",
+					"name": "Cross-Origin-Embedder-Policy Header Missing or Invalid",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>Cross-Origin-Embedder-Policy header is a response header that prevents a document from loading any cross-origin resources that don't explicitly grant the document permission (using CORP or CORS).</p>",
+					"instances":[ 
+						{
+							"id": "28",
+							"uri": "http://192.168.0.23:8000",
+							"nodeName": "http:\/\/192.168.0.23:8000",
+							"method": "GET",
+							"param": "Cross-Origin-Embedder-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "31",
+							"uri": "http://192.168.0.23:8000/",
+							"nodeName": "http:\/\/192.168.0.23:8000\/",
+							"method": "GET",
+							"param": "Cross-Origin-Embedder-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "2",
+					"systemic": false,
+					"solution": "<p>Ensure that the application/web server sets the Cross-Origin-Embedder-Policy header appropriately, and that it sets the Cross-Origin-Embedder-Policy header to 'require-corp' for documents.</p><p>If possible, ensure that the end user uses a standards-compliant and modern web browser that supports the Cross-Origin-Embedder-Policy header (https://caniuse.com/mdn-http_headers_cross-origin-embedder-policy).</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cross-Origin-Embedder-Policy</p>",
+					"cweid": "693",
+					"wascid": "14",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "90004",
+					"alertRef": "90004-3",
+					"alert": "Cross-Origin-Opener-Policy Header Missing or Invalid",
+					"name": "Cross-Origin-Opener-Policy Header Missing or Invalid",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>Cross-Origin-Opener-Policy header is a response header that allows a site to control if others included documents share the same browsing context. Sharing the same browsing context with untrusted documents might lead to data leak.</p>",
+					"instances":[ 
+						{
+							"id": "32",
+							"uri": "http://192.168.0.23:8000",
+							"nodeName": "http:\/\/192.168.0.23:8000",
+							"method": "GET",
+							"param": "Cross-Origin-Opener-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "34",
+							"uri": "http://192.168.0.23:8000/",
+							"nodeName": "http:\/\/192.168.0.23:8000\/",
+							"method": "GET",
+							"param": "Cross-Origin-Opener-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "2",
+					"systemic": false,
+					"solution": "<p>Ensure that the application/web server sets the Cross-Origin-Opener-Policy header appropriately, and that it sets the Cross-Origin-Opener-Policy header to 'same-origin' for documents.</p><p>'same-origin-allow-popups' is considered as less secured and should be avoided.</p><p>If possible, ensure that the end user uses a standards-compliant and modern web browser that supports the Cross-Origin-Opener-Policy header (https://caniuse.com/mdn-http_headers_cross-origin-opener-policy).</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cross-Origin-Opener-Policy</p>",
+					"cweid": "693",
+					"wascid": "14",
+					"sourceid": "7"
+				},
+				{
+					"pluginid": "90004",
+					"alertRef": "90004-1",
+					"alert": "Cross-Origin-Resource-Policy Header Missing or Invalid",
+					"name": "Cross-Origin-Resource-Policy Header Missing or Invalid",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>Cross-Origin-Resource-Policy header is an opt-in header designed to counter side-channels attacks like Spectre. Resource should be specifically set as shareable amongst different origins.</p>",
+					"instances":[ 
+						{
+							"id": "26",
+							"uri": "http://192.168.0.23:8000",
+							"nodeName": "http:\/\/192.168.0.23:8000",
+							"method": "GET",
+							"param": "Cross-Origin-Resource-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "27",
+							"uri": "http://192.168.0.23:8000/",
+							"nodeName": "http:\/\/192.168.0.23:8000\/",
+							"method": "GET",
+							"param": "Cross-Origin-Resource-Policy",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "2",
+					"systemic": false,
+					"solution": "<p>Ensure that the application/web server sets the Cross-Origin-Resource-Policy header appropriately, and that it sets the Cross-Origin-Resource-Policy header to 'same-origin' for all web pages.</p><p>'same-site' is considered as less secured and should be avoided.</p><p>If resources must be shared, set the header to 'cross-origin'.</p><p>If possible, ensure that the end user uses a standards-compliant and modern web browser that supports the Cross-Origin-Resource-Policy header (https://caniuse.com/mdn-http_headers_cross-origin-resource-policy).</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cross-Origin-Embedder-Policy</p>",
+					"cweid": "693",
+					"wascid": "14",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10063",
+					"alertRef": "10063-1",
+					"alert": "Permissions Policy Header Not Set",
+					"name": "Permissions Policy Header Not Set",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>Permissions Policy Header is an added layer of security that helps to restrict from unauthorized access or usage of browser/client features by web resources. This policy ensures the user privacy by limiting or specifying the features of the browsers can be used by the web resources. Permissions Policy provides a set of standard HTTP headers that allow website owners to limit which features of browsers can be used by the page such as camera, microphone, location, full screen etc.</p>",
+					"instances":[ 
+						{
+							"id": "23",
+							"uri": "http://192.168.0.23:8000",
+							"nodeName": "http:\/\/192.168.0.23:8000",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "24",
+							"uri": "http://192.168.0.23:8000/",
+							"nodeName": "http:\/\/192.168.0.23:8000\/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "2",
+					"systemic": false,
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Permissions-Policy header.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Permissions-Policy</p><p>https://developer.chrome.com/blog/feature-policy/</p><p>https://scotthelme.co.uk/a-new-security-header-feature-policy/</p><p>https://w3c.github.io/webappsec-feature-policy/</p><p>https://www.smashingmagazine.com/2018/12/feature-policy/</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10021",
+					"alertRef": "10021",
+					"alert": "X-Content-Type-Options Header Missing",
+					"name": "X-Content-Type-Options Header Missing",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.</p>",
+					"instances":[ 
+						{
+							"id": "17",
+							"uri": "http://192.168.0.23:8000",
+							"nodeName": "http:\/\/192.168.0.23:8000",
+							"method": "GET",
+							"param": "x-content-type-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						},
+						{
+							"id": "18",
+							"uri": "http://192.168.0.23:8000/",
+							"nodeName": "http:\/\/192.168.0.23:8000\/",
+							"method": "GET",
+							"param": "x-content-type-options",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+						}
+					],
+					"count": "2",
+					"systemic": false,
+					"solution": "<p>Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages.</p><p>If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.</p>",
+					"otherinfo": "<p>This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.</p><p>At \"High\" threshold this scan rule will not alert on client or server error responses.</p>",
+					"reference": "<p>https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/gg622941(v=vs.85)</p><p>https://owasp.org/www-community/Security_Headers</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10027",
+					"alertRef": "10027",
+					"alert": "Information Disclosure - Suspicious Comments",
+					"name": "Information Disclosure - Suspicious Comments",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>The response appears to contain suspicious comments which may help an attacker.</p>",
+					"instances":[ 
+						{
+							"id": "8",
+							"uri": "http://192.168.0.23:8000",
+							"nodeName": "http:\/\/192.168.0.23:8000",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "// todo texto que viene del",
+							"otherinfo": "The following pattern was used: \\bTODO\\b and was detected in likely comment: \"// todo texto que viene del servidor pasa por aqu\u00ED antes de tocar innerHTML\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"id": "9",
+							"uri": "http://192.168.0.23:8000/",
+							"nodeName": "http:\/\/192.168.0.23:8000\/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "// todo texto que viene del",
+							"otherinfo": "The following pattern was used: \\bTODO\\b and was detected in likely comment: \"// todo texto que viene del servidor pasa por aqu\u00ED antes de tocar innerHTML\", see evidence field for the suspicious comment/snippet."
+						}
+					],
+					"count": "2",
+					"systemic": false,
+					"solution": "<p>Remove all comments that return information that may help an attacker and fix any underlying problems they refer to.</p>",
+					"otherinfo": "<p>The following pattern was used: \\bTODO\\b and was detected in likely comment: \"// todo texto que viene del servidor pasa por aqu\u00ED antes de tocar innerHTML\", see evidence field for the suspicious comment/snippet.</p>",
+					"reference": "",
+					"cweid": "615",
+					"wascid": "13",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10109",
+					"alertRef": "10109",
+					"alert": "Modern Web Application",
+					"name": "Modern Web Application",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>The application appears to be a modern web application. If you need to explore it automatically then the Client Spider may well be more effective than the standard one.</p>",
+					"instances":[ 
+						{
+							"id": "10",
+							"uri": "http://192.168.0.23:8000",
+							"nodeName": "http:\/\/192.168.0.23:8000",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script>\r\n  const ICONS = {\r\n    arq: '<path d=\"M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6\"/>',\r\n    seg: '<path d=\"M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3Z\"/><path d=\"m9 12 2 2 4-4\"/>',\r\n    mat: '<path d=\"M4 19h16M7 15l3-8 3 5 2-3 2 6\"/>',\r\n    his: '<path d=\"M4 10h16M6 10v8M10 10v8M14 10v8M18 10v8M3 20h18M12 3l9 5H3l9-5Z\"/>',\r\n    copy: '<rect x=\"9\" y=\"9\" width=\"12\" height=\"12\" rx=\"2\"/><path d=\"M5 15V5a2 2 0 0 1 2-2h10\"/>',\r\n    check: '<path d=\"m5 12 5 5L20 7\"/>',\r\n    chev: '<path d=\"m9 6 6 6-6 6\"/>',\r\n    alert: '<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8v4M12 16h.01\"/>',\r\n    sun: '<circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4\"/>',\r\n    moon: '<path d=\"M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z\"/>',\r\n    book: '<path d=\"M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14ZM4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5\"/>',\r\n  };\r\n  const icon = (name, size = 16) =>\r\n    `<svg width=\"${size}\" height=\"${size}\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\">${ICONS[name]}</svg>`;\r\n\r\n  const SUBJECTS = [\r\n    { key: 'arq', name: 'Arquitectura de Software', example: 'Patrones MVC, hexagonal y diagramas C4',\r\n      docs: [['Syllabus', 'syllabus de arquitectura de software'], ['Apuntes', 'apuntes de patrones arquitect\u00F3nicos'], ['Taller', 'taller de arquitectura']] },\r\n    { key: 'seg', name: 'Fundamentos de Seguridad de la Informaci\u00F3n', short: 'Seguridad de la Informaci\u00F3n', example: 'Triada CIA, criptograf\u00EDa y OWASP Top 10',\r\n      docs: [['Syllabus', 'syllabus de seguridad de la informaci\u00F3n'], ['Apuntes', 'apuntes de CIA y OWASP'], ['Gu\u00EDa', 'gu\u00EDa de laboratorio de seguridad']] },\r\n    { key: 'mat', name: 'Matem\u00E1ticas B\u00E1sicas', example: 'L\u00EDmites, derivadas e integrales',\r\n      docs: [['Syllabus', 'syllabus de matem\u00E1ticas'], ['Apuntes', 'apuntes de derivadas e integrales'], ['Taller', 'taller de matem\u00E1ticas']] },\r\n    { key: 'his', name: 'Historia de Colombia', example: 'Independencia, Frente Nacional y Constituci\u00F3n de 1991',\r\n      docs: [['Syllabus', 'syllabus de historia de colombia'], ['Apuntes', 'apuntes de independencia de Colombia'], ['Gu\u00EDa', 'gu\u00EDa del ensayo de historia']] },\r\n  ];\r\n  const subjectByName = name => SUBJECTS.find(s => s.name === name);\r\n\r\n  const $ = id => document.getElementById(id);\r\n  const thread = $('thread'), scroll = $('scroll'), input = $('input'), sendBtn = $('send');\r\n  let busy = false;\r\n  let started = false;\r\n\r\n  // \u2500\u2500 utilidades \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\n  // todo texto que viene del servidor pasa por aqu\u00ED antes de tocar innerHTML\r\n  const esc = s => String(s).replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#39;' }[c]));\r\n  const bold = s => s.replace(/\\*\\*(.+?)\\*\\*/g, '<strong>$1</strong>');\r\n  const now = () => new Date().toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });\r\n  const toBottom = () => requestAnimationFrame(() => { scroll.scrollTop = scroll.scrollHeight; });\r\n  const store = {\r\n    get(k) { try { return localStorage.getItem(k); } catch { return null; } },\r\n    set(k, v) { try { localStorage.setItem(k, v); } catch {} },\r\n  };\r\n\r\n  // \u2500\u2500 tema claro/oscuro \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\n  function currentTheme() {\r\n    const forced = document.documentElement.dataset.theme;\r\n    if (forced) return forced;\r\n    return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';\r\n  }\r\n  function paintThemeBtn() {\r\n    const dark = currentTheme() === 'dark';\r\n    $('themeBtn').innerHTML = icon(dark ? 'sun' : 'moon', 18);\r\n    $('themeBtn').setAttribute('aria-label', dark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro');\r\n  }\r\n  const savedTheme = store.get('theme');\r\n  if (savedTheme) document.documentElement.dataset.theme = savedTheme;\r\n  paintThemeBtn();\r\n  $('themeBtn').onclick = () => {\r\n    const next = currentTheme() === 'dark' ? 'light' : 'dark';\r\n    document.documentElement.dataset.theme = next;\r\n    store.set('theme', next);\r\n    paintThemeBtn();\r\n  };\r\n\r\n  // \u2500\u2500 barra lateral \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\n  $('subjects').innerHTML = SUBJECTS.map((s, i) => `\r\n    <div class=\"subject${i === 0 ? ' open' : ''}\" style=\"--c: var(--${s.key})\">\r\n      <button class=\"subject-head\" type=\"button\" aria-expanded=\"${i === 0}\">\r\n        <span class=\"subject-icon\">${icon(s.key)}</span>\r\n        <span class=\"name\">${esc(s.short || s.name)}</span>\r\n        <span class=\"chev\">${icon('chev', 14)}</span>\r\n      </button>\r\n      <div class=\"subject-docs\">\r\n        ${s.docs.map(([label, q]) => `<button class=\"doc-link\" type=\"button\" data-q=\"${esc(q)}\">${esc(label)}</button>`).join('')}\r\n      </div>\r\n    </div>`).join('');\r\n\r\n  $('subjects').addEventListener('click', e => {\r\n    const head = e.target.closest('.subject-head');\r\n    if (head) {\r\n      const box = head.parentElement;\r\n      box.classList.toggle('open');\r\n      head.setAttribute('aria-expanded', box.classList.contains('open'));\r\n      return;\r\n    }\r\n    const link = e.target.closest('.doc-link');\r\n    if (link) { closeNav(); send(link.dataset.q); }\r\n  });\r\n\r\n  const closeNav = () => document.body.classList.remove('nav-open');\r\n  $('menuBtn').onclick = () => document.body.classList.add('nav-open');\r\n  $('scrim').onclick = closeNav;\r\n  addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });\r\n\r\n  // \u2500\u2500 bienvenida \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\n  function renderWelcome() {\r\n    started = false;\r\n    $('convTitle').textContent = 'Nueva conversaci\u00F3n';\r\n    thread.innerHTML = `\r\n      <section class=\"welcome\">\r\n        <span class=\"welcome-badge\">${icon('book', 14)} Base de conocimiento del curso</span>\r\n        <h3>\u00BFQu\u00E9 necesitas repasar hoy?</h3>\r\n        <p>Consulta el syllabus, los apuntes, talleres y gu\u00EDas de tus materias. Elige una para empezar o escribe tu pregunta abajo.</p>\r\n        <div class=\"cards\">\r\n          ${SUBJECTS.map(s => `\r\n            <button class=\"card\" type=\"button\" style=\"--c: var(--${s.key})\" data-q=\"${esc(s.docs[1][1])}\">\r\n              <span class=\"subject-icon\">${icon(s.key, 18)}</span>\r\n              <span><strong>${esc(s.short || s.name)}</strong><small>${esc(s.example)}</small></span>\r\n            </button>`).join('')}\r\n        </div>\r\n      </section>`;\r\n  }\r\n  thread.addEventListener('click', e => {\r\n    const card = e.target.closest('.card');\r\n    if (card) send(card.dataset.q);\r\n  });\r\n\r\n  // \u2500\u2500 formato de respuestas \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\n  function formatContent(contenido) {\r\n    const [title, ...lines] = contenido.split('\\n');\r\n    let html = `<h4>${esc(title)}</h4>`;\r\n    let list = [], grades = [], facts = [];\r\n    const flush = () => {\r\n      if (list.length) { html += `<ol>${list.map(li => `<li><span>${li}</span></li>`).join('')}</ol>`; list = []; }\r\n      if (grades.length) { html += `<div class=\"grades\">${grades.join('')}</div>`; grades = []; }\r\n    };\r\n    for (const raw of lines) {\r\n      const line = raw.trim();\r\n      if (!line) continue;\r\n      let m;\r\n      if ((m = line.match(/^Corte\\s+(\\d+)\\s*\\((\\d+%)\\):\\s*(.*)$/i))) {\r\n        if (list.length) flush();\r\n        grades.push(`<div class=\"grade\"><div><b>Corte ${esc(m[1])}</b><small>${esc(m[2])}</small></div><span>${esc(m[3])}</span></div>`);\r\n      } else if ((m = line.match(/^(?:\\d+\\.|Paso\\s+\\d+:)\\s*(.*)$/i))) {\r\n        if (grades.length) flush();\r\n        list.push(esc(m[1]));\r\n      } else if (line.includes(' | ')) {\r\n        flush();\r\n        facts.push(...line.split(' | ').map(part => {\r\n          const [k, ...v] = part.split(':');\r\n          return v.length ? `<span class=\"fact\"><b>${esc(k.trim())}:</b> ${esc(v.join(':').trim())}</span>` : `<span class=\"fact\">${esc(part)}</span>`;\r\n        }));\r\n      } else if ((m = line.match(/^([^:]{2,40}):\\s+(.+)$/))) {\r\n        flush();\r\n        html += `<p><strong>${esc(m[1])}:</strong> ${esc(m[2])}</p>`;\r\n      } else {\r\n        flush();\r\n        html += `<p>${esc(line)}</p>`;\r\n      }\r\n    }\r\n    flush();\r\n    if (facts.length) html += `<div class=\"facts\">${facts.join('')}</div>`;\r\n    return html;\r\n  }\r\n\r\n  // \u2500\u2500 mensajes \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\n  function startThread() {\r\n    if (started) return;\r\n    started = true;\r\n    thread.innerHTML = '';\r\n  }\r\n\r\n  function addUser(text) {\r\n    const el = document.createElement('div');\r\n    el.className = 'msg user';\r\n    el.innerHTML = `<div class=\"msg-body\"><div class=\"bubble\">${esc(text)}</div><div class=\"meta\">${now()}</div></div>`;\r\n    thread.appendChild(el);\r\n    toBottom();\r\n  }\r\n\r\n  function botShell(inner) {\r\n    const el = document.createElement('div');\r\n    el.className = 'msg bot';\r\n    el.innerHTML = `\r\n      <div class=\"avatar\" aria-hidden=\"true\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M12 3 1 8l11 5 9-4.1V15h2V8L12 3Zm-6 9.3V16c0 1.9 2.7 4 6 4s6-2.1 6-4v-3.7l-6 2.7-6-2.7Z\"/></svg></div>\r\n      <div class=\"msg-body\"><div class=\"bot-name\">Asistente</div>${inner}</div>`;\r\n    thread.appendChild(el);\r\n    toBottom();\r\n    return el;\r\n  }\r\n\r\n  function addTyping() {\r\n    return botShell('<div class=\"typing\" aria-label=\"El asistente est\u00E1 escribiendo\"><i></i><i></i><i></i></div>');\r\n  }\r\n\r\n  function addAnswer(data) {\r\n    if (data.materia && data.contenido) {\r\n      const s = subjectByName(data.materia);\r\n      const key = s ? s.key : 'arq';\r\n      const el = botShell(`\r\n        <article class=\"answer\" style=\"--c: var(--${key})\">\r\n          <div class=\"answer-head\">\r\n            <span class=\"pill\">${icon(key, 13)} ${esc(s ? (s.short || s.name) : data.materia)}</span>\r\n            <span class=\"pill neutral\">${esc(data.tipo)}</span>\r\n          </div>\r\n          <div class=\"answer-body\">${formatContent(data.contenido)}</div>\r\n        </article>\r\n        <div class=\"meta\"><span>${now()}</span><span class=\"actions\"><button class=\"act\" type=\"button\">${icon('copy', 13)} Copiar</button></span></div>`);\r\n      const btn = el.querySelector('.act');\r\n      btn.onclick = async () => {\r\n        try {\r\n          await navigator.clipboard.writeText(data.contenido);\r\n          btn.innerHTML = `${icon('check', 13)} Copiado`;\r\n          setTimeout(() => { btn.innerHTML = `${icon('copy', 13)} Copiar`; }, 1600);\r\n        } catch {}\r\n      };\r\n    } else {\r\n      // respuesta sin documento (o backend viejo que solo manda \"answer\")\r\n      const text = data.answer || 'No obtuve respuesta del servidor.';\r\n      botShell(`<div class=\"bot-text\">${text.split('\\n').filter(Boolean).map(p => `<p>${bold(esc(p))}</p>`).join('')}</div><div class=\"meta\">${now()}</div>`);\r\n    }\r\n  }\r\n\r\n  function addError(retryText) {\r\n    const el = botShell(`\r\n      <div class=\"error-card\">${icon('alert', 18)}<span>No pude conectar con el servidor. Revisa que el backend siga corriendo.</span>\r\n      <button type=\"button\">Reintentar</button></div>`);\r\n    el.querySelector('button').onclick = () => { el.remove(); send(retryText, { silent: true }); };\r\n  }\r\n\r\n  async function send(text, { silent = false } = {}) {\r\n    const msg = (text ?? input.value).trim();\r\n    if (!msg || busy) return;\r\n    busy = true;\r\n    startThread();\r\n    if ($('convTitle').textContent === 'Nueva conversaci\u00F3n') {\r\n      $('convTitle').textContent = msg.length > 60 ? msg.slice(0, 57) + '\u2026' : msg;\r\n    }\r\n    if (!silent) addUser(msg);\r\n    if (text === undefined) { input.value = ''; autosize(); }\r\n    updateComposer();\r\n\r\n    const typing = addTyping();\r\n    const t0 = performance.now();\r\n    try {\r\n      const res = await fetch('/ask', {\r\n        method: 'POST',\r\n        headers: { 'Content-Type': 'application/json' },\r\n        body: JSON.stringify({ message: msg }),\r\n      });\r\n      if (!res.ok) throw new Error(res.status);\r\n      const data = await res.json();\r\n      // pausa m\u00EDnima para que el indicador de escritura no parpadee\r\n      await new Promise(r => setTimeout(r, Math.max(0, 450 - (performance.now() - t0))));\r\n      typing.remove();\r\n      addAnswer(data);\r\n      setStatus(true);\r\n    } catch {\r\n      typing.remove();\r\n      addError(msg);\r\n      setStatus(false);\r\n    }\r\n    busy = false;\r\n    updateComposer();\r\n    input.focus();\r\n  }\r\n\r\n  // \u2500\u2500 caja de texto \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\n  function autosize() {\r\n    input.style.height = 'auto';\r\n    input.style.height = Math.min(input.scrollHeight, 160) + 'px';\r\n  }\r\n  function updateComposer() {\r\n    const n = input.value.length;\r\n    $('counter').textContent = `${n}/500`;\r\n    $('counter').classList.toggle('warn', n >= 450);\r\n    sendBtn.disabled = busy || !input.value.trim();\r\n  }\r\n  input.addEventListener('input', () => { autosize(); updateComposer(); });\r\n  input.addEventListener('keydown', e => {\r\n    if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); send(); }\r\n  });\r\n  $('form').addEventListener('submit', e => { e.preventDefault(); send(); });\r\n  $('newChat').onclick = () => { closeNav(); renderWelcome(); input.focus(); };\r\n\r\n  // \u2500\u2500 estado del servidor \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\n  function setStatus(ok) {\r\n    $('status').className = 'status ' + (ok ? 'ok' : 'down');\r\n    $('statusText').textContent = ok ? 'Servidor conectado' : 'Servidor sin conexi\u00F3n';\r\n  }\r\n  async function ping() {\r\n    try { setStatus((await fetch('/health', { cache: 'no-store' })).ok); } catch { setStatus(false); }\r\n  }\r\n\r\n  // en pantallas angostas el placeholder largo se parte en dos l\u00EDneas\r\n  const narrow = matchMedia('(max-width: 600px)');\r\n  const fitPlaceholder = () => {\r\n    input.placeholder = narrow.matches ? 'Escribe tu pregunta\u2026' : 'Pregunta por un syllabus, apuntes, taller o gu\u00EDa\u2026';\r\n  };\r\n  narrow.addEventListener('change', fitPlaceholder);\r\n  fitPlaceholder();\r\n\r\n  renderWelcome();\r\n  ping();\r\n  setInterval(ping, 20000);\r\n  input.focus();\r\n</script>",
+							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
+						},
+						{
+							"id": "11",
+							"uri": "http://192.168.0.23:8000/",
+							"nodeName": "http:\/\/192.168.0.23:8000\/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script>\r\n  const ICONS = {\r\n    arq: '<path d=\"M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6\"/>',\r\n    seg: '<path d=\"M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3Z\"/><path d=\"m9 12 2 2 4-4\"/>',\r\n    mat: '<path d=\"M4 19h16M7 15l3-8 3 5 2-3 2 6\"/>',\r\n    his: '<path d=\"M4 10h16M6 10v8M10 10v8M14 10v8M18 10v8M3 20h18M12 3l9 5H3l9-5Z\"/>',\r\n    copy: '<rect x=\"9\" y=\"9\" width=\"12\" height=\"12\" rx=\"2\"/><path d=\"M5 15V5a2 2 0 0 1 2-2h10\"/>',\r\n    check: '<path d=\"m5 12 5 5L20 7\"/>',\r\n    chev: '<path d=\"m9 6 6 6-6 6\"/>',\r\n    alert: '<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8v4M12 16h.01\"/>',\r\n    sun: '<circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4\"/>',\r\n    moon: '<path d=\"M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z\"/>',\r\n    book: '<path d=\"M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14ZM4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5\"/>',\r\n  };\r\n  const icon = (name, size = 16) =>\r\n    `<svg width=\"${size}\" height=\"${size}\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\">${ICONS[name]}</svg>`;\r\n\r\n  const SUBJECTS = [\r\n    { key: 'arq', name: 'Arquitectura de Software', example: 'Patrones MVC, hexagonal y diagramas C4',\r\n      docs: [['Syllabus', 'syllabus de arquitectura de software'], ['Apuntes', 'apuntes de patrones arquitect\u00F3nicos'], ['Taller', 'taller de arquitectura']] },\r\n    { key: 'seg', name: 'Fundamentos de Seguridad de la Informaci\u00F3n', short: 'Seguridad de la Informaci\u00F3n', example: 'Triada CIA, criptograf\u00EDa y OWASP Top 10',\r\n      docs: [['Syllabus', 'syllabus de seguridad de la informaci\u00F3n'], ['Apuntes', 'apuntes de CIA y OWASP'], ['Gu\u00EDa', 'gu\u00EDa de laboratorio de seguridad']] },\r\n    { key: 'mat', name: 'Matem\u00E1ticas B\u00E1sicas', example: 'L\u00EDmites, derivadas e integrales',\r\n      docs: [['Syllabus', 'syllabus de matem\u00E1ticas'], ['Apuntes', 'apuntes de derivadas e integrales'], ['Taller', 'taller de matem\u00E1ticas']] },\r\n    { key: 'his', name: 'Historia de Colombia', example: 'Independencia, Frente Nacional y Constituci\u00F3n de 1991',\r\n      docs: [['Syllabus', 'syllabus de historia de colombia'], ['Apuntes', 'apuntes de independencia de Colombia'], ['Gu\u00EDa', 'gu\u00EDa del ensayo de historia']] },\r\n  ];\r\n  const subjectByName = name => SUBJECTS.find(s => s.name === name);\r\n\r\n  const $ = id => document.getElementById(id);\r\n  const thread = $('thread'), scroll = $('scroll'), input = $('input'), sendBtn = $('send');\r\n  let busy = false;\r\n  let started = false;\r\n\r\n  // \u2500\u2500 utilidades \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\n  // todo texto que viene del servidor pasa por aqu\u00ED antes de tocar innerHTML\r\n  const esc = s => String(s).replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#39;' }[c]));\r\n  const bold = s => s.replace(/\\*\\*(.+?)\\*\\*/g, '<strong>$1</strong>');\r\n  const now = () => new Date().toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });\r\n  const toBottom = () => requestAnimationFrame(() => { scroll.scrollTop = scroll.scrollHeight; });\r\n  const store = {\r\n    get(k) { try { return localStorage.getItem(k); } catch { return null; } },\r\n    set(k, v) { try { localStorage.setItem(k, v); } catch {} },\r\n  };\r\n\r\n  // \u2500\u2500 tema claro/oscuro \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\n  function currentTheme() {\r\n    const forced = document.documentElement.dataset.theme;\r\n    if (forced) return forced;\r\n    return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';\r\n  }\r\n  function paintThemeBtn() {\r\n    const dark = currentTheme() === 'dark';\r\n    $('themeBtn').innerHTML = icon(dark ? 'sun' : 'moon', 18);\r\n    $('themeBtn').setAttribute('aria-label', dark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro');\r\n  }\r\n  const savedTheme = store.get('theme');\r\n  if (savedTheme) document.documentElement.dataset.theme = savedTheme;\r\n  paintThemeBtn();\r\n  $('themeBtn').onclick = () => {\r\n    const next = currentTheme() === 'dark' ? 'light' : 'dark';\r\n    document.documentElement.dataset.theme = next;\r\n    store.set('theme', next);\r\n    paintThemeBtn();\r\n  };\r\n\r\n  // \u2500\u2500 barra lateral \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\n  $('subjects').innerHTML = SUBJECTS.map((s, i) => `\r\n    <div class=\"subject${i === 0 ? ' open' : ''}\" style=\"--c: var(--${s.key})\">\r\n      <button class=\"subject-head\" type=\"button\" aria-expanded=\"${i === 0}\">\r\n        <span class=\"subject-icon\">${icon(s.key)}</span>\r\n        <span class=\"name\">${esc(s.short || s.name)}</span>\r\n        <span class=\"chev\">${icon('chev', 14)}</span>\r\n      </button>\r\n      <div class=\"subject-docs\">\r\n        ${s.docs.map(([label, q]) => `<button class=\"doc-link\" type=\"button\" data-q=\"${esc(q)}\">${esc(label)}</button>`).join('')}\r\n      </div>\r\n    </div>`).join('');\r\n\r\n  $('subjects').addEventListener('click', e => {\r\n    const head = e.target.closest('.subject-head');\r\n    if (head) {\r\n      const box = head.parentElement;\r\n      box.classList.toggle('open');\r\n      head.setAttribute('aria-expanded', box.classList.contains('open'));\r\n      return;\r\n    }\r\n    const link = e.target.closest('.doc-link');\r\n    if (link) { closeNav(); send(link.dataset.q); }\r\n  });\r\n\r\n  const closeNav = () => document.body.classList.remove('nav-open');\r\n  $('menuBtn').onclick = () => document.body.classList.add('nav-open');\r\n  $('scrim').onclick = closeNav;\r\n  addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });\r\n\r\n  // \u2500\u2500 bienvenida \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\n  function renderWelcome() {\r\n    started = false;\r\n    $('convTitle').textContent = 'Nueva conversaci\u00F3n';\r\n    thread.innerHTML = `\r\n      <section class=\"welcome\">\r\n        <span class=\"welcome-badge\">${icon('book', 14)} Base de conocimiento del curso</span>\r\n        <h3>\u00BFQu\u00E9 necesitas repasar hoy?</h3>\r\n        <p>Consulta el syllabus, los apuntes, talleres y gu\u00EDas de tus materias. Elige una para empezar o escribe tu pregunta abajo.</p>\r\n        <div class=\"cards\">\r\n          ${SUBJECTS.map(s => `\r\n            <button class=\"card\" type=\"button\" style=\"--c: var(--${s.key})\" data-q=\"${esc(s.docs[1][1])}\">\r\n              <span class=\"subject-icon\">${icon(s.key, 18)}</span>\r\n              <span><strong>${esc(s.short || s.name)}</strong><small>${esc(s.example)}</small></span>\r\n            </button>`).join('')}\r\n        </div>\r\n      </section>`;\r\n  }\r\n  thread.addEventListener('click', e => {\r\n    const card = e.target.closest('.card');\r\n    if (card) send(card.dataset.q);\r\n  });\r\n\r\n  // \u2500\u2500 formato de respuestas \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\n  function formatContent(contenido) {\r\n    const [title, ...lines] = contenido.split('\\n');\r\n    let html = `<h4>${esc(title)}</h4>`;\r\n    let list = [], grades = [], facts = [];\r\n    const flush = () => {\r\n      if (list.length) { html += `<ol>${list.map(li => `<li><span>${li}</span></li>`).join('')}</ol>`; list = []; }\r\n      if (grades.length) { html += `<div class=\"grades\">${grades.join('')}</div>`; grades = []; }\r\n    };\r\n    for (const raw of lines) {\r\n      const line = raw.trim();\r\n      if (!line) continue;\r\n      let m;\r\n      if ((m = line.match(/^Corte\\s+(\\d+)\\s*\\((\\d+%)\\):\\s*(.*)$/i))) {\r\n        if (list.length) flush();\r\n        grades.push(`<div class=\"grade\"><div><b>Corte ${esc(m[1])}</b><small>${esc(m[2])}</small></div><span>${esc(m[3])}</span></div>`);\r\n      } else if ((m = line.match(/^(?:\\d+\\.|Paso\\s+\\d+:)\\s*(.*)$/i))) {\r\n        if (grades.length) flush();\r\n        list.push(esc(m[1]));\r\n      } else if (line.includes(' | ')) {\r\n        flush();\r\n        facts.push(...line.split(' | ').map(part => {\r\n          const [k, ...v] = part.split(':');\r\n          return v.length ? `<span class=\"fact\"><b>${esc(k.trim())}:</b> ${esc(v.join(':').trim())}</span>` : `<span class=\"fact\">${esc(part)}</span>`;\r\n        }));\r\n      } else if ((m = line.match(/^([^:]{2,40}):\\s+(.+)$/))) {\r\n        flush();\r\n        html += `<p><strong>${esc(m[1])}:</strong> ${esc(m[2])}</p>`;\r\n      } else {\r\n        flush();\r\n        html += `<p>${esc(line)}</p>`;\r\n      }\r\n    }\r\n    flush();\r\n    if (facts.length) html += `<div class=\"facts\">${facts.join('')}</div>`;\r\n    return html;\r\n  }\r\n\r\n  // \u2500\u2500 mensajes \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\n  function startThread() {\r\n    if (started) return;\r\n    started = true;\r\n    thread.innerHTML = '';\r\n  }\r\n\r\n  function addUser(text) {\r\n    const el = document.createElement('div');\r\n    el.className = 'msg user';\r\n    el.innerHTML = `<div class=\"msg-body\"><div class=\"bubble\">${esc(text)}</div><div class=\"meta\">${now()}</div></div>`;\r\n    thread.appendChild(el);\r\n    toBottom();\r\n  }\r\n\r\n  function botShell(inner) {\r\n    const el = document.createElement('div');\r\n    el.className = 'msg bot';\r\n    el.innerHTML = `\r\n      <div class=\"avatar\" aria-hidden=\"true\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M12 3 1 8l11 5 9-4.1V15h2V8L12 3Zm-6 9.3V16c0 1.9 2.7 4 6 4s6-2.1 6-4v-3.7l-6 2.7-6-2.7Z\"/></svg></div>\r\n      <div class=\"msg-body\"><div class=\"bot-name\">Asistente</div>${inner}</div>`;\r\n    thread.appendChild(el);\r\n    toBottom();\r\n    return el;\r\n  }\r\n\r\n  function addTyping() {\r\n    return botShell('<div class=\"typing\" aria-label=\"El asistente est\u00E1 escribiendo\"><i></i><i></i><i></i></div>');\r\n  }\r\n\r\n  function addAnswer(data) {\r\n    if (data.materia && data.contenido) {\r\n      const s = subjectByName(data.materia);\r\n      const key = s ? s.key : 'arq';\r\n      const el = botShell(`\r\n        <article class=\"answer\" style=\"--c: var(--${key})\">\r\n          <div class=\"answer-head\">\r\n            <span class=\"pill\">${icon(key, 13)} ${esc(s ? (s.short || s.name) : data.materia)}</span>\r\n            <span class=\"pill neutral\">${esc(data.tipo)}</span>\r\n          </div>\r\n          <div class=\"answer-body\">${formatContent(data.contenido)}</div>\r\n        </article>\r\n        <div class=\"meta\"><span>${now()}</span><span class=\"actions\"><button class=\"act\" type=\"button\">${icon('copy', 13)} Copiar</button></span></div>`);\r\n      const btn = el.querySelector('.act');\r\n      btn.onclick = async () => {\r\n        try {\r\n          await navigator.clipboard.writeText(data.contenido);\r\n          btn.innerHTML = `${icon('check', 13)} Copiado`;\r\n          setTimeout(() => { btn.innerHTML = `${icon('copy', 13)} Copiar`; }, 1600);\r\n        } catch {}\r\n      };\r\n    } else {\r\n      // respuesta sin documento (o backend viejo que solo manda \"answer\")\r\n      const text = data.answer || 'No obtuve respuesta del servidor.';\r\n      botShell(`<div class=\"bot-text\">${text.split('\\n').filter(Boolean).map(p => `<p>${bold(esc(p))}</p>`).join('')}</div><div class=\"meta\">${now()}</div>`);\r\n    }\r\n  }\r\n\r\n  function addError(retryText) {\r\n    const el = botShell(`\r\n      <div class=\"error-card\">${icon('alert', 18)}<span>No pude conectar con el servidor. Revisa que el backend siga corriendo.</span>\r\n      <button type=\"button\">Reintentar</button></div>`);\r\n    el.querySelector('button').onclick = () => { el.remove(); send(retryText, { silent: true }); };\r\n  }\r\n\r\n  async function send(text, { silent = false } = {}) {\r\n    const msg = (text ?? input.value).trim();\r\n    if (!msg || busy) return;\r\n    busy = true;\r\n    startThread();\r\n    if ($('convTitle').textContent === 'Nueva conversaci\u00F3n') {\r\n      $('convTitle').textContent = msg.length > 60 ? msg.slice(0, 57) + '\u2026' : msg;\r\n    }\r\n    if (!silent) addUser(msg);\r\n    if (text === undefined) { input.value = ''; autosize(); }\r\n    updateComposer();\r\n\r\n    const typing = addTyping();\r\n    const t0 = performance.now();\r\n    try {\r\n      const res = await fetch('/ask', {\r\n        method: 'POST',\r\n        headers: { 'Content-Type': 'application/json' },\r\n        body: JSON.stringify({ message: msg }),\r\n      });\r\n      if (!res.ok) throw new Error(res.status);\r\n      const data = await res.json();\r\n      // pausa m\u00EDnima para que el indicador de escritura no parpadee\r\n      await new Promise(r => setTimeout(r, Math.max(0, 450 - (performance.now() - t0))));\r\n      typing.remove();\r\n      addAnswer(data);\r\n      setStatus(true);\r\n    } catch {\r\n      typing.remove();\r\n      addError(msg);\r\n      setStatus(false);\r\n    }\r\n    busy = false;\r\n    updateComposer();\r\n    input.focus();\r\n  }\r\n\r\n  // \u2500\u2500 caja de texto \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\n  function autosize() {\r\n    input.style.height = 'auto';\r\n    input.style.height = Math.min(input.scrollHeight, 160) + 'px';\r\n  }\r\n  function updateComposer() {\r\n    const n = input.value.length;\r\n    $('counter').textContent = `${n}/500`;\r\n    $('counter').classList.toggle('warn', n >= 450);\r\n    sendBtn.disabled = busy || !input.value.trim();\r\n  }\r\n  input.addEventListener('input', () => { autosize(); updateComposer(); });\r\n  input.addEventListener('keydown', e => {\r\n    if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); send(); }\r\n  });\r\n  $('form').addEventListener('submit', e => { e.preventDefault(); send(); });\r\n  $('newChat').onclick = () => { closeNav(); renderWelcome(); input.focus(); };\r\n\r\n  // \u2500\u2500 estado del servidor \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\r\n  function setStatus(ok) {\r\n    $('status').className = 'status ' + (ok ? 'ok' : 'down');\r\n    $('statusText').textContent = ok ? 'Servidor conectado' : 'Servidor sin conexi\u00F3n';\r\n  }\r\n  async function ping() {\r\n    try { setStatus((await fetch('/health', { cache: 'no-store' })).ok); } catch { setStatus(false); }\r\n  }\r\n\r\n  // en pantallas angostas el placeholder largo se parte en dos l\u00EDneas\r\n  const narrow = matchMedia('(max-width: 600px)');\r\n  const fitPlaceholder = () => {\r\n    input.placeholder = narrow.matches ? 'Escribe tu pregunta\u2026' : 'Pregunta por un syllabus, apuntes, taller o gu\u00EDa\u2026';\r\n  };\r\n  narrow.addEventListener('change', fitPlaceholder);\r\n  fitPlaceholder();\r\n\r\n  renderWelcome();\r\n  ping();\r\n  setInterval(ping, 20000);\r\n  input.focus();\r\n</script>",
+							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
+						}
+					],
+					"count": "2",
+					"systemic": false,
+					"solution": "<p>This is an informational alert and so no changes are required.</p>",
+					"otherinfo": "<p>No links have been found while there are scripts, which is an indication that this is a modern web application.</p>",
+					"reference": "",
+					"cweid": "-1",
+					"wascid": "-1",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10049",
+					"alertRef": "10049-3",
+					"alert": "Storable and Cacheable Content",
+					"name": "Storable and Cacheable Content",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>The response contents are storable by caching components such as proxy servers, and may be retrieved directly from the cache, rather than from the origin server by the caching servers, in response to similar requests from other users. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where \"shared\" caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
+					"instances":[ 
+						{
+							"id": "20",
+							"uri": "http://192.168.0.23:8000",
+							"nodeName": "http:\/\/192.168.0.23:8000",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
+						},
+						{
+							"id": "21",
+							"uri": "http://192.168.0.23:8000/",
+							"nodeName": "http:\/\/192.168.0.23:8000\/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
+						},
+						{
+							"id": "0",
+							"uri": "http://192.168.0.23:8000/robots.txt",
+							"nodeName": "http:\/\/192.168.0.23:8000\/robots.txt",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
+						},
+						{
+							"id": "7",
+							"uri": "http://192.168.0.23:8000/sitemap.xml",
+							"nodeName": "http:\/\/192.168.0.23:8000\/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
+						}
+					],
+					"count": "4",
+					"systemic": false,
+					"solution": "<p>Validate that the response does not contain sensitive, personal or user-specific information. If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:</p><p>Cache-Control: no-cache, no-store, must-revalidate, private</p><p>Pragma: no-cache</p><p>Expires: 0</p><p>This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request.</p>",
+					"otherinfo": "<p>In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234.</p>",
+					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
+					"cweid": "524",
+					"wascid": "13",
+					"sourceid": "1"
+				}
+			]
+		}
+	],
+	"sequences":[
+	]
+
+}

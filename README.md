@@ -60,3 +60,7 @@ Para la arquitectura objetivo (ADR-001): Google Cloud con Cloud Armor, Apigee AI
 ## Uso de IA
 
 Usamos Claude para ayudarnos a organizar la propuesta y pensar la arquitectura. Las decisiones y el contenido final los revisamos y ajustamos nosotros como equipo.
+
+## Seguridad
+
+[Informe de seguridad](docs/SECURITY.md)

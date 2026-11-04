@@ -1,0 +1,37 @@
+name: DAST pasivo - staging autorizado
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  zap:
+    # Configurar Settings > Variables > Actions > STAGING_URL con URL propia.
+    if: ${{ vars.STAGING_URL != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Validar destino autorizado
+        env:
+          TARGET: ${{ vars.STAGING_URL }}
+        run: |
+          python - <<'PYV'
+          import os, urllib.parse, sys
+          u=urllib.parse.urlparse(os.environ['TARGET'])
+          if u.scheme != 'https' or not u.hostname or u.username or u.password or u.port not in (None,443):
+              sys.exit('Se requiere URL HTTPS de staging sin credenciales ni puerto alterno')
+          print('Antes de continuar: el propietario debe haber autorizado el análisis:',u.hostname)
+          PYV
+      - name: Ejecutar baseline pasivo (sin ataques activos)
+        env:
+          TARGET: ${{ vars.STAGING_URL }}
+        run: |
+          mkdir -p reports
+          docker run --rm -v "$PWD/reports:/zap/wrk:rw" ghcr.io/zaproxy/zaproxy:stable \
+            zap-baseline.py -t "$TARGET" -m 1 -r zap-report.html -J zap-report.json -I || true
+      - name: Adjuntar resultados
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: informe-zap
+          path: reports/
+          if-no-files-found: warn
