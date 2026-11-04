@@ -65,6 +65,37 @@ Identificación del alcance → SAST (Semgrep) → detección de secretos (Gitle
 
 ---
 
+## Hallazgo F-03
+
+- **Título:** Headers de seguridad HTTP faltantes
+- **Categoría OWASP/CWE:** CWE-693 (Protection Mechanism Failure) / OWASP A05:2021 Security Misconfiguration
+- **Severidad:** Media
+- **Justificación:** La app no enviaba headers de seguridad estándar, exponiendo a los usuarios a ataques de clickjacking, MIME sniffing e inyección de contenido desde orígenes cruzados.
+- **Evidencia antes del fix:**
+
+  ![Zap Report 1](images/Zap%20Report%201.png)
+  ![Zap Report 2](images/Zap%20Report%202.png)
+
+- **Headers faltantes:**
+  - `X-Frame-Options: DENY`
+  - `X-Content-Type-Options: nosniff`
+  - `Content-Security-Policy: default-src 'self'`
+  - `Permissions-Policy`
+  - `Cross-Origin-Embedder-Policy: require-corp`
+  - `Cross-Origin-Opener-Policy: same-origin`
+- **Impacto:**
+  - Confidencialidad: Medio — posible exfiltración via clickjacking
+  - Integridad: Medio — MIME sniffing puede ejecutar contenido no esperado
+  - Disponibilidad: Bajo
+- **Pasos de validación segura:** OWASP ZAP baseline pasivo sobre entorno local con Docker. Sin ataques activos ni datos reales.
+- **Corrección:** Middleware `security_headers` agregado en `chatbot/main.py`
+- **Resultado del reescaneo:** WARN-NEW bajó de 9 a 6. Los 5 headers agregados pasaron a PASS.
+
+  ![Zap Report After 1](images/Zap%20Report%20After%201.png)
+  ![Zap Report After 2](images/Zap%20Report%20After%202.png)
+
+---
+
 ## Reflexión final
 
 Dependabot identificó de forma automática y precisa las dos vulnerabilidades en dependencias directas, con información detallada de versiones afectadas y parches disponibles. Semgrep y Gitleaks no reportaron hallazgos críticos en el código fuente propio, lo que indica que el riesgo principal del proyecto en este ciclo proviene de la cadena de suministro de software (SCA) y no del código desarrollado internamente. Para integrar seguridad de forma continua al ciclo de desarrollo, se recomienda mantener Dependabot activo con actualizaciones automáticas, agregar un paso de verificación de versiones mínimas en el pipeline CI y establecer un proceso de triage periódico de alertas.

@@ -14,7 +14,7 @@
 | Semgrep | SAST | 2026 | Ver artefacto `resultado-semgrep` | Actions → Seguridad estática |
 | Gitleaks CLI | Secretos | 2026 | Sin secretos detectados | Actions → Seguridad estática |
 | Dependabot | SCA | 2026 | 1 crítica, 1 moderada | Ver sección 3 |
-| OWASP ZAP Baseline | DAST pasivo | N/A | Sin staging disponible | N/A |
+| OWASP ZAP Baseline | DAST pasivo | 2026 | 9 WARN antes / 6 WARN después | `docs/images/zap-report.html` |
 
 > **Limitación Gitleaks:** `gitleaks/gitleaks-action@v3` requiere `GITLEAKS_LICENSE` en repositorios de organizaciones. Se usa Gitleaks CLI directamente como alternativa. GitHub secret scanning no está disponible en el plan actual de la organización.
 
@@ -40,7 +40,7 @@
 ![Moderate 5](images/Moderate%205.png)
 ![Moderate 6](images/Moderate%206.png)
 
-## 4. Validación antes y después
+| F-03 | DAST | Headers de seguridad HTTP faltantes (X-Frame-Options, CSP, COEP, etc) | Media | `chatbot/main.py` | Agregar middleware de headers | Corregido |
 
 - Evidencia inicial: capturas en `docs/images/`
 - Pull request con corrección: `security/lab-fsi` — commit `fix(deps): actualizar sentence-transformers 3.1.1->5.6.0 y python-dotenv 1.0.1->1.2.2`
