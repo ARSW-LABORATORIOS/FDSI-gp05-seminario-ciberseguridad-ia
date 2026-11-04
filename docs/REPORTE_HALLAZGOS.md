@@ -1,7 +1,7 @@
 # Informe técnico de hallazgos
 
 **Proyecto:** FDSI-GP-05: Seminario de Ciberseguridad en IA
-**Integrantes:** Mabel Bernal, Juan Pablo Vélez, Esteban Caicedo, Nicolás Prieto
+**Integrantes:** Mabel Bernal, Nicolás Prieto
 **Repositorio / commit:** https://github.com/ARSW-LABORATORIOS/FDSI-gp05-seminario-ciberseguridad-ia / rama `security/lab-fsi`
 **Entorno autorizado:** Repositorio propio de laboratorio, sin staging externo
 **Fecha:** 2026

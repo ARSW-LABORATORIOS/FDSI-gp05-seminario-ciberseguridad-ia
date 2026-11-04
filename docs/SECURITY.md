@@ -4,7 +4,7 @@
 - Repositorio: https://github.com/ARSW-LABORATORIOS/FDSI-gp05-seminario-ciberseguridad-ia
 - Rama evaluada: `security/lab-fsi`
 - URL de staging propio (si aplica): N/A
-- Responsable / autorización: GP-05 / 2026
+- Responsable / autorización: Mabel Bernal, Nicolás Prieto / 2026
 - Fuera de alcance: producción, sistemas de terceros, datos reales y pruebas destructivas.
 
 ## 2. Línea base y herramientas
