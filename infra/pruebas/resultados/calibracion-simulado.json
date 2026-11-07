@@ -1,0 +1,645 @@
+{
+  "fecha": "2026-11-07T06:26:38.431796+00:00",
+  "modelo": "simulado",
+  "preguntas": 30,
+  "respondidas": 30,
+  "correctas": 0,
+  "errores_proveedor": 0,
+  "rechazos_proveedor": 0,
+  "tokens_entrada_total": 10539,
+  "tokens_salida_total": 3504,
+  "usd_total": 0.011922,
+  "truncadas": 0,
+  "tokens_total": {
+    "mediana": 489.0,
+    "p95": 761,
+    "max": 764,
+    "promedio": 468.1
+  },
+  "tokens_entrada": {
+    "mediana": 367.0,
+    "max": 573
+  },
+  "tokens_salida": {
+    "mediana": 122.0,
+    "max": 191
+  },
+  "segundos": {
+    "mediana": 0.33,
+    "p95": 0.38,
+    "max": 0.39
+  },
+  "segundos_modelo": {
+    "mediana": 0.26,
+    "p95": 0.27,
+    "max": 0.27
+  },
+  "segundos_busqueda": {
+    "mediana": 0.046,
+    "max": 0.088
+  },
+  "supuestos": {
+    "estudiantes": 40,
+    "preguntas_por_dia": 10,
+    "preguntas_por_sesion": 30,
+    "estudiantes_por_ip": 20
+  },
+  "sugerido": {
+    "TOKEN_RESERVE_PER_QUESTION": 1000,
+    "QUOTA_TOKENS_SESSION": 23000,
+    "QUOTA_TOKENS_IP_DAY": 98000,
+    "QUOTA_TOKENS_GLOBAL_DAY": 300000,
+    "QUOTA_TOKENS_IP_AHORRO": 3000
+  },
+  "filas": [
+    {
+      "pregunta": "¿Quién dicta Arquitectura de Software?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.382,
+      "segundos_rag": 0.085,
+      "segundos_llm": 0.272,
+      "tokens_entrada": 365,
+      "tokens_salida": 121,
+      "tokens_total": 486,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-syllabus.md",
+        "arquitectura-de-software-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿En qué salón es Arquitectura de Software?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.331,
+      "segundos_rag": 0.048,
+      "segundos_llm": 0.263,
+      "tokens_entrada": 366,
+      "tokens_salida": 122,
+      "tokens_total": 488,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-syllabus.md",
+        "arquitectura-de-software-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuánto vale el corte 2 de Arquitectura de Software?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.387,
+      "segundos_rag": 0.088,
+      "segundos_llm": 0.263,
+      "tokens_entrada": 368,
+      "tokens_salida": 122,
+      "tokens_total": 490,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-syllabus.md",
+        "arquitectura-de-software-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué es la arquitectura hexagonal?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.325,
+      "segundos_rag": 0.045,
+      "segundos_llm": 0.264,
+      "tokens_entrada": 364,
+      "tokens_salida": 121,
+      "tokens_total": 485,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-syllabus.md",
+        "arquitectura-de-software-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuáles son los niveles del diagrama C4?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.343,
+      "segundos_rag": 0.047,
+      "segundos_llm": 0.264,
+      "tokens_entrada": 571,
+      "tokens_salida": 190,
+      "tokens_total": 761,
+      "fragmentos": 5,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-syllabus.md",
+        "arquitectura-de-software-taller.md",
+        "matematicas-basicas-apuntes.md",
+        "matematicas-basicas-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué es un ADR?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.325,
+      "segundos_rag": 0.043,
+      "segundos_llm": 0.263,
+      "tokens_entrada": 194,
+      "tokens_salida": 64,
+      "tokens_total": 258,
+      "fragmentos": 2,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuándo se entrega el taller de diagramas C4?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.325,
+      "segundos_rag": 0.047,
+      "segundos_llm": 0.263,
+      "tokens_entrada": 265,
+      "tokens_salida": 88,
+      "tokens_total": 353,
+      "fragmentos": 2,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "arquitectura-de-software-syllabus.md",
+        "arquitectura-de-software-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué significa la triada CIA?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.325,
+      "segundos_rag": 0.044,
+      "segundos_llm": 0.264,
+      "tokens_entrada": 281,
+      "tokens_salida": 93,
+      "tokens_total": 374,
+      "fragmentos": 2,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "fundamentos-de-seguridad-de-la-informacion-apuntes.md",
+        "fundamentos-de-seguridad-de-la-informacion-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cómo se calcula el riesgo en seguridad de la información?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.325,
+      "segundos_rag": 0.045,
+      "segundos_llm": 0.262,
+      "tokens_entrada": 406,
+      "tokens_salida": 135,
+      "tokens_total": 541,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "fundamentos-de-seguridad-de-la-informacion-apuntes.md",
+        "fundamentos-de-seguridad-de-la-informacion-guia.md",
+        "fundamentos-de-seguridad-de-la-informacion-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué diferencia hay entre criptografía simétrica y asimétrica?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.324,
+      "segundos_rag": 0.045,
+      "segundos_llm": 0.264,
+      "tokens_entrada": 154,
+      "tokens_salida": 51,
+      "tokens_total": 205,
+      "fragmentos": 1,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "fundamentos-de-seguridad-de-la-informacion-apuntes.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuántos pasos tiene la guía de análisis de riesgos?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.328,
+      "segundos_rag": 0.045,
+      "segundos_llm": 0.264,
+      "tokens_entrada": 203,
+      "tokens_salida": 67,
+      "tokens_total": 270,
+      "fragmentos": 1,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "fundamentos-de-seguridad-de-la-informacion-guia.md"
+      ]
+    },
+    {
+      "pregunta": "¿Quién dicta Fundamentos de Seguridad de la Información?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.327,
+      "segundos_rag": 0.042,
+      "segundos_llm": 0.263,
+      "tokens_entrada": 406,
+      "tokens_salida": 135,
+      "tokens_total": 541,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "fundamentos-de-seguridad-de-la-informacion-apuntes.md",
+        "fundamentos-de-seguridad-de-la-informacion-guia.md",
+        "fundamentos-de-seguridad-de-la-informacion-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué entra en el corte 3 de Fundamentos de Seguridad de la Información?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.325,
+      "segundos_rag": 0.044,
+      "segundos_llm": 0.265,
+      "tokens_entrada": 291,
+      "tokens_salida": 97,
+      "tokens_total": 388,
+      "fragmentos": 2,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "fundamentos-de-seguridad-de-la-informacion-apuntes.md",
+        "fundamentos-de-seguridad-de-la-informacion-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuándo fue la batalla de Boyacá?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.336,
+      "segundos_rag": 0.048,
+      "segundos_llm": 0.269,
+      "tokens_entrada": 183,
+      "tokens_salida": 61,
+      "tokens_total": 244,
+      "fragmentos": 1,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué fue el Frente Nacional?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.338,
+      "segundos_rag": 0.055,
+      "segundos_llm": 0.264,
+      "tokens_entrada": 332,
+      "tokens_salida": 110,
+      "tokens_total": 442,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué pasó en el Bogotazo?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.321,
+      "segundos_rag": 0.045,
+      "segundos_llm": 0.263,
+      "tokens_entrada": 435,
+      "tokens_salida": 145,
+      "tokens_total": 580,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué reconoció la Constitución de 1991?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.337,
+      "segundos_rag": 0.043,
+      "segundos_llm": 0.263,
+      "tokens_entrada": 438,
+      "tokens_salida": 146,
+      "tokens_total": 584,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuál es el tema del ensayo del corte 1 de Historia de Colombia?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.337,
+      "segundos_rag": 0.049,
+      "segundos_llm": 0.264,
+      "tokens_entrada": 444,
+      "tokens_salida": 148,
+      "tokens_total": 592,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuántas fuentes pide el ensayo de Historia de Colombia?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.343,
+      "segundos_rag": 0.053,
+      "segundos_llm": 0.27,
+      "tokens_entrada": 442,
+      "tokens_salida": 147,
+      "tokens_total": 589,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Quién dicta Historia de Colombia?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.34,
+      "segundos_rag": 0.049,
+      "segundos_llm": 0.263,
+      "tokens_entrada": 437,
+      "tokens_salida": 145,
+      "tokens_total": 582,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué es la regla de la cadena?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.327,
+      "segundos_rag": 0.047,
+      "segundos_llm": 0.263,
+      "tokens_entrada": 573,
+      "tokens_salida": 191,
+      "tokens_total": 764,
+      "fragmentos": 5,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md",
+        "matematicas-basicas-apuntes.md",
+        "matematicas-basicas-syllabus.md",
+        "matematicas-basicas-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué mide la derivada?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.326,
+      "segundos_rag": 0.047,
+      "segundos_llm": 0.263,
+      "tokens_entrada": 376,
+      "tokens_salida": 125,
+      "tokens_total": 501,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "matematicas-basicas-apuntes.md",
+        "matematicas-basicas-syllabus.md",
+        "matematicas-basicas-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué es la integral definida?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.324,
+      "segundos_rag": 0.042,
+      "segundos_llm": 0.265,
+      "tokens_entrada": 196,
+      "tokens_salida": 65,
+      "tokens_total": 261,
+      "fragmentos": 1,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "matematicas-basicas-apuntes.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué temas entran en el corte 2 de Matemáticas Básicas?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.329,
+      "segundos_rag": 0.044,
+      "segundos_llm": 0.263,
+      "tokens_entrada": 267,
+      "tokens_salida": 89,
+      "tokens_total": 356,
+      "fragmentos": 2,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "matematicas-basicas-syllabus.md",
+        "matematicas-basicas-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuándo se entrega el taller de derivadas?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.332,
+      "segundos_rag": 0.048,
+      "segundos_llm": 0.266,
+      "tokens_entrada": 389,
+      "tokens_salida": 129,
+      "tokens_total": 518,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-syllabus.md",
+        "matematicas-basicas-syllabus.md",
+        "matematicas-basicas-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Quién dicta Matemáticas Básicas?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.319,
+      "segundos_rag": 0.043,
+      "segundos_llm": 0.261,
+      "tokens_entrada": 379,
+      "tokens_salida": 126,
+      "tokens_total": 505,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "matematicas-basicas-apuntes.md",
+        "matematicas-basicas-syllabus.md",
+        "matematicas-basicas-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿En qué horario es Matemáticas Básicas?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.34,
+      "segundos_rag": 0.057,
+      "segundos_llm": 0.264,
+      "tokens_entrada": 174,
+      "tokens_salida": 58,
+      "tokens_total": 232,
+      "fragmentos": 1,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "matematicas-basicas-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué es MVC?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.321,
+      "segundos_rag": 0.045,
+      "segundos_llm": 0.262,
+      "tokens_entrada": 358,
+      "tokens_salida": 119,
+      "tokens_total": 477,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-syllabus.md",
+        "arquitectura-de-software-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuánto vale la redacción en el ensayo de Historia de Colombia?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.326,
+      "segundos_rag": 0.046,
+      "segundos_llm": 0.262,
+      "tokens_entrada": 444,
+      "tokens_salida": 148,
+      "tokens_total": 592,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿En qué salón es Historia de Colombia?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.33,
+      "segundos_rag": 0.048,
+      "segundos_llm": 0.264,
+      "tokens_entrada": 438,
+      "tokens_salida": 146,
+      "tokens_total": 584,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "[Respuesta simulada por mock-llm, ruta principal] Revisé los documentos del curso que me pasaron.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    }
+  ]
+}

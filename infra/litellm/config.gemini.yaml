@@ -1,0 +1,37 @@
+# Para la demo: Gemini como modelo principal y el modelo local de respaldo. Si Google limita la
+# llamada o se cae, LiteLLM pasa al local. Sin el perfil `ollama` la ruta de respaldo falla.
+#
+# gemini-3.5-flash-lite: en las pruebas acertó 30 de 30 preguntas sin errores del proveedor.
+# gemini-3.1-flash-lite es más barato, pero dio errores 503 y una llamada colgada de 120 s, y
+# gemini-2.5-flash-lite aparece en la lista pero responde 404 "no longer available to new users".
+model_list:
+  - model_name: asistente
+    litellm_params:
+      model: gemini/gemini-3.5-flash-lite
+      api_key: os.environ/GEMINI_API_KEY
+  - model_name: asistente-respaldo
+    litellm_params:
+      model: ollama_chat/qwen2.5:1.5b
+      api_base: http://ollama:11434
+
+router_settings:
+  # Google respondió 503 en 2 de 30 llamadas medidas: un reintento antes de pasar al modelo local.
+  # Un 429 no se reintenta: insistir solo gasta el cupo del minuto.
+  num_retries: 1
+  retry_policy:
+    RateLimitErrorRetries: 0
+    TimeoutErrorRetries: 0
+    InternalServerErrorRetries: 1
+  # Medimos llamadas de hasta 42 s y una colgada 120 s: mejor pasar al respaldo que dejar esperando
+  timeout: 45
+  fallbacks:
+    - asistente: [asistente-respaldo]
+  allowed_fails: 3
+  cooldown_time: 30
+
+litellm_settings:
+  drop_params: true
+  telemetry: false
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY

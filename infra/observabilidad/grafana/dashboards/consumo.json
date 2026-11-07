@@ -1,0 +1,208 @@
+{
+  "title": "FDSI-GP-05 · Consumo del asistente",
+  "uid": "fdsi-consumo",
+  "schemaVersion": 39,
+  "refresh": "5s",
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  },
+  "panels": [
+    {
+      "id": 1,
+      "title": "Tope diario de tokens usado",
+      "type": "gauge",
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "datasource": {
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "min": 0,
+          "max": 1,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 0.6
+              },
+              {
+                "color": "red",
+                "value": 0.8
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "expr": "gateway_tokens_global_hoy / gateway_tokens_global_tope",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Tokens por minuto",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 9,
+        "x": 6,
+        "y": 0
+      },
+      "datasource": {
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "sum by (tipo) (rate(gateway_tokens_total[1m])) * 60",
+          "legendFormat": "{{tipo}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Preguntas por resultado (por segundo)",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 9,
+        "x": 15,
+        "y": 0
+      },
+      "datasource": {
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "sum by (resultado) (rate(gateway_peticiones_total[1m]))",
+          "legendFormat": "{{resultado}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Latencia p95 de /ask",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "datasource": {
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        }
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum by (le) (rate(gateway_latencia_segundos_bucket[1m])))",
+          "legendFormat": "p95",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Aciertos de caché",
+      "type": "stat",
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 12,
+        "y": 8
+      },
+      "datasource": {
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit"
+        }
+      },
+      "targets": [
+        {
+          "expr": "sum(gateway_peticiones_total{resultado=\"cache\"}) / sum(gateway_peticiones_total{resultado=~\"cache|ok\"})",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Sesiones por resultado",
+      "type": "stat",
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 8
+      },
+      "datasource": {
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "sum by (resultado) (gateway_sesiones_total)",
+          "legendFormat": "{{resultado}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "type": "stat",
+      "title": "Costo estimado (USD, a precio de lista)",
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 0,
+        "y": 16
+      },
+      "datasource": {
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD",
+          "decimals": 4
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "colorMode": "value"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum(gateway_costo_usd_total)",
+          "datasource": {
+            "uid": "prometheus"
+          }
+        }
+      ]
+    }
+  ]
+}

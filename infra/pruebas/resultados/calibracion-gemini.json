@@ -1,0 +1,647 @@
+{
+  "fecha": "2026-11-07T04:58:44.992232+00:00",
+  "modelo": "gemini-3.5-flash-lite",
+  "preguntas": 30,
+  "respondidas": 30,
+  "correctas": 30,
+  "errores_proveedor": 0,
+  "rechazos_proveedor": 0,
+  "tokens_entrada_total": 12182,
+  "tokens_salida_total": 576,
+  "usd_total": 0.005095,
+  "truncadas": 0,
+  "tokens_total": {
+    "mediana": 431.0,
+    "p95": 736,
+    "max": 763,
+    "promedio": 425.3
+  },
+  "tokens_entrada": {
+    "mediana": 404.5,
+    "max": 733
+  },
+  "tokens_salida": {
+    "mediana": 18.0,
+    "max": 52
+  },
+  "segundos": {
+    "mediana": 1.15,
+    "p95": 3.85,
+    "max": 4.42
+  },
+  "segundos_modelo": {
+    "mediana": 1.06,
+    "p95": 3.78,
+    "max": 4.35
+  },
+  "segundos_busqueda": {
+    "mediana": 0.049,
+    "max": 0.292
+  },
+  "supuestos": {
+    "estudiantes": 40,
+    "preguntas_por_dia": 10,
+    "preguntas_por_sesion": 30,
+    "estudiantes_por_ip": 20
+  },
+  "sugerido": {
+    "TOKEN_RESERVE_PER_QUESTION": 1200,
+    "QUOTA_TOKENS_SESSION": 23000,
+    "QUOTA_TOKENS_IP_DAY": 86000,
+    "QUOTA_TOKENS_GLOBAL_DAY": 260000,
+    "QUOTA_TOKENS_IP_AHORRO": 3600,
+    "LLM_RPM_GLOBAL": 13,
+    "LLM_RPM_POR_IP": 4
+  },
+  "filas": [
+    {
+      "pregunta": "¿Quién dicta Arquitectura de Software?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 1.5,
+      "segundos_rag": 0.292,
+      "segundos_llm": 1.106,
+      "tokens_entrada": 401,
+      "tokens_salida": 5,
+      "tokens_total": 406,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El Ing. Ramírez.",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-syllabus.md",
+        "arquitectura-de-software-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿En qué salón es Arquitectura de Software?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 1.142,
+      "segundos_rag": 0.071,
+      "segundos_llm": 1.035,
+      "tokens_entrada": 403,
+      "tokens_salida": 9,
+      "tokens_total": 412,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El salón es B-204.",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-syllabus.md",
+        "arquitectura-de-software-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuánto vale el corte 2 de Arquitectura de Software?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 1.781,
+      "segundos_rag": 0.058,
+      "segundos_llm": 1.689,
+      "tokens_entrada": 406,
+      "tokens_salida": 9,
+      "tokens_total": 415,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El corte 2 vale 35%.",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-syllabus.md",
+        "arquitectura-de-software-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué es la arquitectura hexagonal?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 2.268,
+      "segundos_rag": 0.116,
+      "segundos_llm": 2.136,
+      "tokens_entrada": 400,
+      "tokens_salida": 33,
+      "tokens_total": 433,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "Según el contexto, la arquitectura hexagonal (Ports & Adapters) es un patrón arquitectónico en el cual el dominio no depende de frameworks ni de bases de datos.",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-syllabus.md",
+        "arquitectura-de-software-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuáles son los niveles del diagrama C4?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 1.838,
+      "segundos_rag": 0.061,
+      "segundos_llm": 1.727,
+      "tokens_entrada": 714,
+      "tokens_salida": 22,
+      "tokens_total": 736,
+      "fragmentos": 5,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "Los 4 niveles del diagrama C4 son: Contexto, Contenedor, Componente y Código.",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-syllabus.md",
+        "arquitectura-de-software-taller.md",
+        "matematicas-basicas-apuntes.md",
+        "matematicas-basicas-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué es un ADR?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 1.668,
+      "segundos_rag": 0.058,
+      "segundos_llm": 1.566,
+      "tokens_entrada": 202,
+      "tokens_salida": 19,
+      "tokens_total": 221,
+      "fragmentos": 2,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "Un ADR (Architecture Decision Record) es un documento que registra por qué se tomó una decisión.",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuándo se entrega el taller de diagramas C4?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.785,
+      "segundos_rag": 0.056,
+      "segundos_llm": 0.706,
+      "tokens_entrada": 301,
+      "tokens_salida": 26,
+      "tokens_total": 327,
+      "fragmentos": 2,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El taller de diagramas C4 se entrega en el aula virtual antes del viernes a las 11:59 pm.",
+      "fuentes": [
+        "arquitectura-de-software-syllabus.md",
+        "arquitectura-de-software-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué significa la triada CIA?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.782,
+      "segundos_rag": 0.057,
+      "segundos_llm": 0.696,
+      "tokens_entrada": 299,
+      "tokens_salida": 52,
+      "tokens_total": 351,
+      "fragmentos": 2,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "La tríada CIA significa:\n* **Confidencialidad:** solo quien debe ver los datos los ve.\n* **Integridad:** los datos no se alteran sin autorización.\n* **Disponibilidad:** el sistema funciona cuando se necesita.",
+      "fuentes": [
+        "fundamentos-de-seguridad-de-la-informacion-apuntes.md",
+        "fundamentos-de-seguridad-de-la-informacion-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cómo se calcula el riesgo en seguridad de la información?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.754,
+      "segundos_rag": 0.048,
+      "segundos_llm": 0.688,
+      "tokens_entrada": 431,
+      "tokens_salida": 36,
+      "tokens_total": 467,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El riesgo se calcula con la fórmula: Riesgo = Probabilidad × Impacto, utilizando una matriz de Probabilidad × Impacto para determinar si es Alto, Medio o Bajo.",
+      "fuentes": [
+        "fundamentos-de-seguridad-de-la-informacion-apuntes.md",
+        "fundamentos-de-seguridad-de-la-informacion-guia.md",
+        "fundamentos-de-seguridad-de-la-informacion-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué diferencia hay entre criptografía simétrica y asimétrica?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 1.262,
+      "segundos_rag": 0.054,
+      "segundos_llm": 1.188,
+      "tokens_entrada": 153,
+      "tokens_salida": 31,
+      "tokens_total": 184,
+      "fragmentos": 1,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "La criptografía simétrica utiliza la misma clave para cifrar y descifrar, mientras que la asimétrica utiliza una clave pública y una privada.",
+      "fuentes": [
+        "fundamentos-de-seguridad-de-la-informacion-apuntes.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuántos pasos tiene la guía de análisis de riesgos?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 1.061,
+      "segundos_rag": 0.045,
+      "segundos_llm": 0.997,
+      "tokens_entrada": 206,
+      "tokens_salida": 7,
+      "tokens_total": 213,
+      "fragmentos": 1,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "La guía tiene 4 pasos.",
+      "fuentes": [
+        "fundamentos-de-seguridad-de-la-informacion-guia.md"
+      ]
+    },
+    {
+      "pregunta": "¿Quién dicta Fundamentos de Seguridad de la Información?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.807,
+      "segundos_rag": 0.049,
+      "segundos_llm": 0.739,
+      "tokens_entrada": 430,
+      "tokens_salida": 5,
+      "tokens_total": 435,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El Ing. Torres.",
+      "fuentes": [
+        "fundamentos-de-seguridad-de-la-informacion-apuntes.md",
+        "fundamentos-de-seguridad-de-la-informacion-guia.md",
+        "fundamentos-de-seguridad-de-la-informacion-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué entra en el corte 3 de Fundamentos de Seguridad de la Información?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.74,
+      "segundos_rag": 0.056,
+      "segundos_llm": 0.667,
+      "tokens_entrada": 308,
+      "tokens_salida": 21,
+      "tokens_total": 329,
+      "fragmentos": 2,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "En el corte 3 entra: OWASP Top 10 y proyecto de auditoría simulada.",
+      "fuentes": [
+        "fundamentos-de-seguridad-de-la-informacion-apuntes.md",
+        "fundamentos-de-seguridad-de-la-informacion-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuándo fue la batalla de Boyacá?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.732,
+      "segundos_rag": 0.046,
+      "segundos_llm": 0.665,
+      "tokens_entrada": 212,
+      "tokens_salida": 14,
+      "tokens_total": 226,
+      "fragmentos": 1,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "La batalla de Boyacá fue en 1819.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué fue el Frente Nacional?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.806,
+      "segundos_rag": 0.045,
+      "segundos_llm": 0.74,
+      "tokens_entrada": 391,
+      "tokens_salida": 33,
+      "tokens_total": 424,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "Según el contexto, el Frente Nacional (1958-1974) fue un acuerdo entre liberales y conservadores para alternarse el poder.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué pasó en el Bogotazo?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 1.424,
+      "segundos_rag": 0.053,
+      "segundos_llm": 1.353,
+      "tokens_entrada": 506,
+      "tokens_salida": 32,
+      "tokens_total": 538,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El contexto no menciona qué pasó en el Bogotazo, solo indica que fue el asesinato de Gaitán y que dio inicio al periodo de La Violencia.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué reconoció la Constitución de 1991?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.787,
+      "segundos_rag": 0.047,
+      "segundos_llm": 0.721,
+      "tokens_entrada": 510,
+      "tokens_salida": 19,
+      "tokens_total": 529,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "La Constitución de 1991 reconoció el Estado Social de Derecho y la diversidad.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuál es el tema del ensayo del corte 1 de Historia de Colombia?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.824,
+      "segundos_rag": 0.051,
+      "segundos_llm": 0.748,
+      "tokens_entrada": 513,
+      "tokens_salida": 24,
+      "tokens_total": 537,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El tema del ensayo del corte 1 es: ¿Fue la independencia de Colombia un proceso popular o de élites?",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuántas fuentes pide el ensayo de Historia de Colombia?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 1.276,
+      "segundos_rag": 0.047,
+      "segundos_llm": 1.211,
+      "tokens_entrada": 509,
+      "tokens_salida": 10,
+      "tokens_total": 519,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El ensayo pide un mínimo de 3 fuentes.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Quién dicta Historia de Colombia?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.781,
+      "segundos_rag": 0.047,
+      "segundos_llm": 0.705,
+      "tokens_entrada": 504,
+      "tokens_salida": 8,
+      "tokens_total": 512,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El profesor Herrera dicta Historia de Colombia.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué es la regla de la cadena?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.977,
+      "segundos_rag": 0.048,
+      "segundos_llm": 0.905,
+      "tokens_entrada": 733,
+      "tokens_salida": 30,
+      "tokens_total": 763,
+      "fragmentos": 5,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "La regla de la cadena es $d/dx[f(g(x))] = f'(g(x)) \\cdot g'(x)$.",
+      "fuentes": [
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md",
+        "matematicas-basicas-apuntes.md",
+        "matematicas-basicas-syllabus.md",
+        "matematicas-basicas-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué mide la derivada?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 1.553,
+      "segundos_rag": 0.045,
+      "segundos_llm": 1.49,
+      "tokens_entrada": 498,
+      "tokens_salida": 11,
+      "tokens_total": 509,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "La derivada mide la tasa de cambio de una función.",
+      "fuentes": [
+        "matematicas-basicas-apuntes.md",
+        "matematicas-basicas-syllabus.md",
+        "matematicas-basicas-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué es la integral definida?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.674,
+      "segundos_rag": 0.044,
+      "segundos_llm": 0.61,
+      "tokens_entrada": 256,
+      "tokens_salida": 17,
+      "tokens_total": 273,
+      "fragmentos": 1,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "Según el contexto, la integral definida es el área bajo la curva entre dos puntos.",
+      "fuentes": [
+        "matematicas-basicas-apuntes.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué temas entran en el corte 2 de Matemáticas Básicas?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 1.748,
+      "segundos_rag": 0.046,
+      "segundos_llm": 1.68,
+      "tokens_entrada": 325,
+      "tokens_salida": 11,
+      "tokens_total": 336,
+      "fragmentos": 2,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "Funciones, límites, introducción a derivadas y parcial.",
+      "fuentes": [
+        "matematicas-basicas-syllabus.md",
+        "matematicas-basicas-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuándo se entrega el taller de derivadas?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 4.419,
+      "segundos_rag": 0.048,
+      "segundos_llm": 4.352,
+      "tokens_entrada": 465,
+      "tokens_salida": 12,
+      "tokens_total": 477,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El taller de derivadas se entrega en clase el próximo miércoles.",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-syllabus.md",
+        "matematicas-basicas-syllabus.md",
+        "matematicas-basicas-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Quién dicta Matemáticas Básicas?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.807,
+      "segundos_rag": 0.056,
+      "segundos_llm": 0.72,
+      "tokens_entrada": 500,
+      "tokens_salida": 3,
+      "tokens_total": 503,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "Prof. Gómez",
+      "fuentes": [
+        "matematicas-basicas-apuntes.md",
+        "matematicas-basicas-syllabus.md",
+        "matematicas-basicas-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿En qué horario es Matemáticas Básicas?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 3.855,
+      "segundos_rag": 0.045,
+      "segundos_llm": 3.781,
+      "tokens_entrada": 191,
+      "tokens_salida": 22,
+      "tokens_total": 213,
+      "fragmentos": 1,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El horario de Matemáticas Básicas es lunes, miércoles y viernes de 8 a 10 am.",
+      "fuentes": [
+        "matematicas-basicas-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué es MVC?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 3.03,
+      "segundos_rag": 0.047,
+      "segundos_llm": 2.965,
+      "tokens_entrada": 398,
+      "tokens_salida": 31,
+      "tokens_total": 429,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "MVC (Model-View-Controller) es un patrón arquitectónico que separa los datos, la lógica y la presentación, y es usado en aplicaciones web.",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-syllabus.md",
+        "arquitectura-de-software-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuánto vale la redacción en el ensayo de Historia de Colombia?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 1.163,
+      "segundos_rag": 0.054,
+      "segundos_llm": 1.087,
+      "tokens_entrada": 511,
+      "tokens_salida": 15,
+      "tokens_total": 526,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El valor de la redacción en el ensayo es del 30%.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿En qué salón es Historia de Colombia?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 2.162,
+      "segundos_rag": 0.044,
+      "segundos_llm": 2.097,
+      "tokens_entrada": 506,
+      "tokens_salida": 9,
+      "tokens_total": 515,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El salón es D-105.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    }
+  ]
+}

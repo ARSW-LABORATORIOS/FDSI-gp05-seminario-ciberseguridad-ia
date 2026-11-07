@@ -1,0 +1,56 @@
+[
+  {
+    "pregunta": "¿Quién dicta Arquitectura de Software?",
+    "estado": 503,
+    "motivo": "proveedor_ocupado",
+    "modelo": null,
+    "segundos": 22.72,
+    "tokens": null,
+    "respuesta": ""
+  },
+  {
+    "pregunta": "¿Qué significa la triada CIA?",
+    "estado": 503,
+    "motivo": "proveedor_ocupado",
+    "modelo": null,
+    "segundos": 7.41,
+    "tokens": null,
+    "respuesta": ""
+  },
+  {
+    "pregunta": "¿Cuándo fue la batalla de Boyacá?",
+    "estado": 503,
+    "motivo": "proveedor_ocupado",
+    "modelo": null,
+    "segundos": 7.36,
+    "tokens": null,
+    "respuesta": ""
+  },
+  {
+    "pregunta": "¿Qué mide la derivada?",
+    "estado": 503,
+    "motivo": "proveedor_ocupado",
+    "modelo": null,
+    "segundos": 7.34,
+    "tokens": null,
+    "respuesta": ""
+  },
+  {
+    "pregunta": "¿Quién dicta Historia de Colombia?",
+    "estado": 503,
+    "motivo": "proveedor_ocupado",
+    "modelo": null,
+    "segundos": 7.38,
+    "tokens": null,
+    "respuesta": ""
+  },
+  {
+    "pregunta": "¿Qué es MVC?",
+    "estado": 503,
+    "motivo": "proveedor_ocupado",
+    "modelo": null,
+    "segundos": 7.45,
+    "tokens": null,
+    "respuesta": ""
+  }
+]

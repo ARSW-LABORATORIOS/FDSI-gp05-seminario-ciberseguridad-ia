@@ -1,0 +1,56 @@
+[
+  {
+    "pregunta": "¿Quién dicta Arquitectura de Software?",
+    "estado": 200,
+    "motivo": null,
+    "modelo": "ollama_chat/qwen2.5:1.5b",
+    "segundos": 8.71,
+    "tokens": 489,
+    "respuesta": "Ing. Ramírez dicta la materia \"Arquitectura de Software\"."
+  },
+  {
+    "pregunta": "¿Qué significa la triada CIA?",
+    "estado": 200,
+    "motivo": null,
+    "modelo": "ollama_chat/qwen2.5:1.5b",
+    "segundos": 2.55,
+    "tokens": 557,
+    "respuesta": "La Triad de Confidencialidad (C), Integridad (I) y Disponibilidad (D) se refiere a tres aspectos clave en el concepto de Seguridad de la Inf"
+  },
+  {
+    "pregunta": "¿Cuándo fue la batalla de Boyacá?",
+    "estado": 200,
+    "motivo": null,
+    "modelo": "ollama_chat/qwen2.5:1.5b",
+    "segundos": 0.61,
+    "tokens": 269,
+    "respuesta": "La batalla de Boyacá tuvo lugar en 1819."
+  },
+  {
+    "pregunta": "¿Qué mide la derivada?",
+    "estado": 200,
+    "motivo": null,
+    "modelo": "ollama_chat/qwen2.5:1.5b",
+    "segundos": 0.72,
+    "tokens": 573,
+    "respuesta": "La derivada mide la tasa de cambio de una función con respecto a su variable."
+  },
+  {
+    "pregunta": "¿Quién dicta Historia de Colombia?",
+    "estado": 200,
+    "motivo": null,
+    "modelo": "ollama_chat/qwen2.5:1.5b",
+    "segundos": 1.12,
+    "tokens": 603,
+    "respuesta": "El docente de Historia de Colombia es el profesor Herrera, que dirige el salón D-105."
+  },
+  {
+    "pregunta": "¿Qué es MVC?",
+    "estado": 200,
+    "motivo": null,
+    "modelo": "ollama_chat/qwen2.5:1.5b",
+    "segundos": 0.85,
+    "tokens": 512,
+    "respuesta": "MVC, Model-View-Controller, separa una aplicación en tres partes:\nModel: La lógica de negocio.\nView: La interfaz viscosa para el usuario.\nCo"
+  }
+]

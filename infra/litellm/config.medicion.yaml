@@ -1,0 +1,22 @@
+# Para medir con un modelo real (lo usa medir.py): todo pasa por el medidor, que reenvía al modelo
+# y cuenta los tokens. Sin failover ni reintentos, para que cada intento se cuente una sola vez.
+model_list:
+  - model_name: asistente
+    litellm_params:
+      model: openai/modelo-medido
+      api_base: http://mock-llm:9000/primary/v1
+      api_key: no-se-usa
+      max_retries: 0
+
+router_settings:
+  num_retries: 0
+  timeout: 150
+  allowed_fails: 100000
+  cooldown_time: 0
+
+litellm_settings:
+  drop_params: true
+  telemetry: false
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY

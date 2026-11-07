@@ -1,0 +1,65 @@
+# Capa 1 del ADR (reemplaza a Cloud Armor): WAF con ModSecurity + OWASP CRS, y límite de
+# peticiones y conexiones por IP. Rechazar aquí no llega ni a Python.
+# Lo que NO reemplaza: un DDoS volumétrico real satura el enlace antes de llegar aquí, y no
+# agrupa por huella TLS (JA4) ni por ASN.
+server_tokens off;
+more_set_headers 'Server: ${SERVER_HEADER}';
+
+limit_req_zone $binary_remote_addr zone=por_ip:10m rate=${EDGE_RATE_PER_IP};
+limit_conn_zone $binary_remote_addr zone=conexiones_ip:10m;
+limit_req_status 429;
+limit_conn_status 429;
+
+upstream gateway {
+    server gateway:8000;
+    keepalive 32;
+}
+
+server {
+    listen ${PORT} default_server;
+    server_name _;
+    root /usr/share/nginx/html;
+    client_max_body_size 32k;
+
+    location = /healthz {
+        access_log off;
+        default_type text/plain;
+        return 200 "OK";
+    }
+
+    location = / {
+        limit_req zone=por_ip burst=${EDGE_BURST} nodelay;
+        try_files /index.html =404;
+    }
+
+    location /vendor/ {
+        limit_req zone=por_ip burst=${EDGE_BURST} nodelay;
+    }
+
+    # solo estas rutas llegan al gateway: /metrics y /docs quedan fuera de internet
+    location ~ ^/(ask|session|config|health|altcha/challenge)$ {
+        limit_req zone=por_ip burst=${EDGE_BURST} nodelay;
+        limit_conn conexiones_ip ${EDGE_CONN_PER_IP};
+
+        proxy_pass http://gateway;
+        proxy_http_version 1.1;
+        proxy_set_header Connection "";
+        proxy_set_header Host $host;
+        # se sobrescribe, nunca se reenvía lo que mande el cliente: si no, falsifican la IP
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_connect_timeout 5s;
+        proxy_read_timeout 180s;
+    }
+
+    location / {
+        return 404;
+    }
+
+    error_page 429 = @demasiadas;
+    location @demasiadas {
+        default_type application/json;
+        add_header Retry-After 5 always;
+        return 429 '{"detail":{"codigo":"limite_borde","mensaje":"Demasiadas peticiones desde tu conexión."}}';
+    }
+}

@@ -1,0 +1,26 @@
+# Egreso a LLMs con un modelo real que corre en Ollama. Gemini queda de respaldo: no es open
+# source, pero tiene capa gratuita. Sin GEMINI_API_KEY esa ruta simplemente falla.
+model_list:
+  - model_name: asistente
+    litellm_params:
+      model: ollama_chat/qwen2.5:1.5b
+      api_base: http://ollama:11434
+  - model_name: asistente-respaldo
+    litellm_params:
+      model: gemini/gemini-2.5-flash
+      api_key: os.environ/GEMINI_API_KEY
+
+router_settings:
+  num_retries: 0
+  timeout: 150
+  fallbacks:
+    - asistente: [asistente-respaldo]
+  allowed_fails: 3
+  cooldown_time: 30
+
+litellm_settings:
+  drop_params: true
+  telemetry: false
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY

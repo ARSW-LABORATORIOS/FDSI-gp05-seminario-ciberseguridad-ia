@@ -30,6 +30,8 @@ Cada capa frena un abuso distinto:
 
 Lo que tenemos en el código (FastAPI + Redis) es la versión de laboratorio que simula esa arquitectura para poder medir. La tabla "Equivalente en el repo" del ADR dice qué parte simula cada capa y cuáles todavía no existen. Queda abierto si la demo final corre en Google Cloud, en Azure o en la laptop con un gateway open source (LiteLLM o Kong).
 
+Como la mayoría de esos servicios son de pago, el [ADR-002](docs/ADR-002-alternativa-open-source.md) propone el reemplazo open source de cada capa, y [`infra/`](infra/README.md) lo deja corriendo en Docker Compose, con los ataques T01–T05 medidos con Gemini, un modelo local y un simulador. Para repetirlos: `python medir.py --modelo gemini`, desde `infra/`.
+
 ## Hitos
 
 | Fecha | Qué toca | Estado |
@@ -42,12 +44,14 @@ Lo que tenemos en el código (FastAPI + Redis) es la versión de laboratorio que
 ## Estructura
 
 ```
-docs/       -> propuesta, avances y ADR-001 (arquitectura objetivo)
+docs/       -> propuesta, avances, ADR-001 (arquitectura objetivo) y ADR-002 (versión open source)
 diagrams/   -> los dos diagramas de arquitectura (unsecure y secure según el ADR-001)
 common/     -> código compartido (búsqueda RAG, llamada al LLM)
 unsecure/   -> la versión sin controles
 secure/     -> la versión con controles (laboratorio que simula el ADR-001)
-chatbot/    -> prototipo con interfaz web del asistente (sin LLM real todavía)
+chatbot/    -> interfaz web del asistente y prototipo sin LLM
+infra/      -> la arquitectura del ADR con piezas open source, en Docker Compose
+course_docs/ -> documentos .md del curso para el RAG (simulados)
 tests/      -> los scripts de las pruebas T01-T05
 ```
 

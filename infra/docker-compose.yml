@@ -1,0 +1,266 @@
+# Arquitectura del ADR-001 con piezas open source (ver docs/ADR-002-alternativa-open-source.md).
+#
+# Las redes hacen el papel de la VPC: `internal: true` significa sin salida a internet.
+#   publica   -> solo el borde queda expuesto
+#   perimetro -> borde <-> gateway
+#   privada   -> gateway, orquestador y gateways de salida (sin internet)
+#   datos     -> Valkey, solo lo ve el gateway
+#   salida    -> LiteLLM y los proveedores: el único camino hacia afuera
+name: fdsi-oss
+
+networks:
+  publica:
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24
+  perimetro:
+    internal: true
+  privada:
+    internal: true
+  datos:
+    internal: true
+  salida: {}
+  observabilidad: {}
+
+volumes:
+  valkey-datos:
+  grafana-datos:
+  ollama-modelos:
+
+services:
+  # ---------- Capa 1: borde ----------
+  edge:
+    # etiqueta flotante en su registro: se fija por digest para que no cambie entre corridas
+    image: owasp/modsecurity-crs@sha256:873ce68a658d2e3b61484a8a24d215f7d15456e7ce5aec5e7114bf000d743365
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      BACKEND: http://gateway:8000
+      PORT: "8080"
+      BLOCKING_PARANOIA: "1"
+      MODSEC_RULE_ENGINE: "on"
+      SERVER_HEADER: ""
+      EDGE_RATE_PER_IP: ${EDGE_RATE_PER_IP:-10r/s}
+      EDGE_BURST: ${EDGE_BURST:-20}
+      EDGE_CONN_PER_IP: ${EDGE_CONN_PER_IP:-20}
+    volumes:
+      - ./edge/default.conf.template:/etc/nginx/templates/conf.d/default.conf.template:ro
+      - ../chatbot/index.html:/usr/share/nginx/html/index.html:ro
+      - ../chatbot/vendor:/usr/share/nginx/html/vendor:ro
+    networks: [publica, perimetro]
+    depends_on:
+      gateway:
+        condition: service_healthy
+    healthcheck:  # el de la imagen revisa HTTPS, que este borde no sirve
+      test: ["CMD", "curl", "-fs", "-o", "/dev/null", "http://127.0.0.1:8080/healthz"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  # ---------- Capas 2 y 3: identidad y AI Gateway (ingreso) ----------
+  gateway:
+    build: ./gateway
+    environment:
+      SESSION_SECRET: ${SESSION_SECRET:?Corre python infra/crear_env.py}
+      ALTCHA_HMAC_KEY: ${ALTCHA_HMAC_KEY:?Corre python infra/crear_env.py}
+      CAPTCHA_ENABLED: ${CAPTCHA_ENABLED:-true}
+      QUOTA_TOKENS_SESSION: ${QUOTA_TOKENS_SESSION:-20000}
+      QUOTA_TOKENS_IP_DAY: ${QUOTA_TOKENS_IP_DAY:-60000}
+      QUOTA_TOKENS_GLOBAL_DAY: ${QUOTA_TOKENS_GLOBAL_DAY:-300000}
+      SPIKE_MAX_REQUESTS: ${SPIKE_MAX_REQUESTS:-5}
+      SPIKE_WINDOW_SECONDS: ${SPIKE_WINDOW_SECONDS:-10}
+      SESSIONS_PER_IP_HOUR: ${SESSIONS_PER_IP_HOUR:-20}
+      PROMPT_TOKEN_LIMIT: ${PROMPT_TOKEN_LIMIT:-200}
+      MAX_CONCURRENT_LLM: ${MAX_CONCURRENT_LLM:-4}
+      LLM_SLOT_WAIT_SECONDS: ${LLM_SLOT_WAIT_SECONDS:-8}
+      LLM_RPM_GLOBAL: ${LLM_RPM_GLOBAL:-0}
+      LLM_RPM_POR_IP: ${LLM_RPM_POR_IP:-0}
+      LLM_RPM_SOSPECHOSA_PCT: ${LLM_RPM_SOSPECHOSA_PCT:-50}
+      QUOTA_AHORRO_PCT: ${QUOTA_AHORRO_PCT:-80}
+      QUOTA_TOKENS_IP_AHORRO: ${QUOTA_TOKENS_IP_AHORRO:-4000}
+      TOKEN_RESERVE_PER_QUESTION: ${TOKEN_RESERVE_PER_QUESTION:-1300}
+      PRECIO_ENTRADA_USD_1M: ${PRECIO_ENTRADA_USD_1M:-0}
+      PRECIO_SALIDA_USD_1M: ${PRECIO_SALIDA_USD_1M:-0}
+      CACHE_SIMILARITY_THRESHOLD: ${CACHE_SIMILARITY_THRESHOLD:-0.90}
+      HF_HUB_OFFLINE: "1"
+    networks: [perimetro, privada, datos]
+    depends_on:
+      valkey:
+        condition: service_healthy
+      orquestador:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request as u; u.urlopen('http://localhost:8000/health', timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+
+  valkey:
+    image: valkey/valkey@sha256:2602ace2be6569bc2bbb06f873776516ab9089821525be34f4305c67eb9db02a
+    command: ["valkey-server", "--appendonly", "yes", "--maxmemory", "256mb", "--maxmemory-policy", "noeviction"]
+    volumes:
+      - valkey-datos:/data
+    networks: [datos]
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  # ---------- Capa 4: orquestador y RAG (zona privada, sin IP publicada) ----------
+  orquestador:
+    build: ./orquestador
+    environment:
+      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:?Corre python infra/crear_env.py}
+      MAX_FRAGMENTOS: ${MAX_FRAGMENTOS:-5}
+      MAX_TOKENS_SALIDA: ${MAX_TOKENS_SALIDA:-300}
+      MAX_PASOS: ${MAX_PASOS:-4}
+      DISTANCIA_MAX: ${DISTANCIA_MAX:-0.78}
+      MARGEN_RELEVANCIA: ${MARGEN_RELEVANCIA:-0.12}
+      COBERTURA_MIN: ${COBERTURA_MIN:-0.6}
+      TIMEOUT_SEGUNDOS: "140"
+    networks: [privada]
+    depends_on:
+      litellm:
+        condition: service_healthy
+      agentgateway:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request as u; u.urlopen('http://localhost:8000/health', timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+
+  mcp-cursos:
+    build: ./mcp-cursos
+    environment:
+      HF_HUB_OFFLINE: "1"
+    volumes:
+      - ../course_docs:/docs:ro
+    networks: [privada]
+    restart: unless-stopped
+
+  # ---------- Capa 5: egreso (herramientas y modelos) ----------
+  agentgateway:
+    image: cr.agentgateway.dev/agentgateway:v1.7.0
+    command: ["-f", "/config.yaml"]
+    volumes:
+      - ./agentgateway/config.yaml:/config.yaml:ro
+    networks: [privada]
+    depends_on: [mcp-cursos]
+    restart: unless-stopped
+
+  # Versión fijada a propósito: LiteLLM sufrió un ataque de cadena de suministro en marzo de
+  # 2026. Actualizar a mano y revisando el aviso de la versión, nunca con `latest`.
+  litellm:
+    image: ghcr.io/berriai/litellm:v1.106.2
+    command: ["--config", "/config/${LITELLM_CONFIG:-config.mock.yaml}", "--port", "4000"]
+    environment:
+      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:?Corre python infra/crear_env.py}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      LITELLM_TELEMETRY: "False"
+      LITELLM_LOCAL_MODEL_COST_MAP: "True"
+    volumes:
+      - ./litellm:/config:ro
+    networks: [privada, salida]
+    healthcheck:  # tarda cerca de un minuto en arrancar
+      test: ["CMD", "python", "-c", "import urllib.request as u; u.urlopen('http://localhost:4000/health/liveliness', timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 40
+    restart: unless-stopped
+
+  # Sin DESTINO_URL simula al modelo. Con DESTINO_URL (lo pone medir.py) reenvía al modelo real y
+  # cuenta los tokens que este reporta, con las mismas estadísticas.
+  mock-llm:
+    build: ./mock-llm
+    environment:
+      DESTINO_URL: ${DESTINO_URL:-}
+      DESTINO_KEY: ${DESTINO_KEY:-}
+      DESTINO_MODELO: ${DESTINO_MODELO:-}
+      MEDICION_TOPE_TOKENS: ${MEDICION_TOPE_TOKENS:-0}
+      DESTINO_TIMEOUT: ${DESTINO_TIMEOUT:-120}
+    networks: [salida]
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:0.13.5
+    profiles: [ollama]
+    environment:
+      OLLAMA_KEEP_ALIVE: 1h  # cargar el modelo tarda minutos: que no se descargue en plena demo
+    volumes:
+      - ollama-modelos:/root/.ollama
+    networks: [salida]
+    restart: unless-stopped
+
+  # ---------- Capa 6: detección y costo ----------
+  prometheus:
+    image: prom/prometheus:v3.5.0
+    volumes:
+      - ./observabilidad/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./observabilidad/alertas.yml:/etc/prometheus/alertas.yml:ro
+    ports:
+      - "127.0.0.1:9090:9090"
+    networks: [privada, observabilidad]
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana-oss:12.1.1
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:?Corre python infra/crear_env.py}
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+    volumes:
+      - grafana-datos:/var/lib/grafana
+      - ./observabilidad/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./observabilidad/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports:
+      - "127.0.0.1:3000:3000"
+    networks: [observabilidad]
+    depends_on: [prometheus]
+    restart: unless-stopped
+
+  # ---------- Solo para pruebas (docker compose --profile pruebas ...) ----------
+  # Línea base a atacar: el mismo orquestador, sin gateway y con los topes abiertos.
+  unsecure:
+    build: ./orquestador
+    profiles: [pruebas]
+    environment:
+      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:?Corre python infra/crear_env.py}
+      MAX_FRAGMENTOS: "50"
+      MAX_TOKENS_SALIDA: "2000"
+      MAX_PASOS: "100"
+    ports:
+      - "127.0.0.1:8000:8000"
+    networks: [publica, privada]
+    depends_on:
+      litellm:
+        condition: service_healthy
+      agentgateway:
+        condition: service_started
+
+  # Corre los ataques desde la red pública con varias IP propias: sin esto todo el tráfico
+  # saldría de una sola IP y el límite por IP mezclaría al atacante con el estudiante legítimo.
+  atacante:
+    build: ./pruebas
+    profiles: [pruebas]
+    command: ["sleep", "infinity"]  # no ataca solo: las pruebas se lanzan con `exec`
+    cap_add: [NET_ADMIN]
+    environment:
+      CAPTCHA_ENABLED: ${CAPTCHA_ENABLED:-true}
+      SPIKE_MAX_REQUESTS: ${SPIKE_MAX_REQUESTS:-5}
+      SPIKE_WINDOW_SECONDS: ${SPIKE_WINDOW_SECONDS:-10}
+      QUOTA_TOKENS_GLOBAL_DAY: ${QUOTA_TOKENS_GLOBAL_DAY:-300000}
+      QUOTA_TOKENS_IP_AHORRO: ${QUOTA_TOKENS_IP_AHORRO:-4000}
+      MAX_TOKENS_SALIDA: ${MAX_TOKENS_SALIDA:-300}
+      PRECIO_ENTRADA_USD_1M: ${PRECIO_ENTRADA_USD_1M:-0}
+      PRECIO_SALIDA_USD_1M: ${PRECIO_SALIDA_USD_1M:-0}
+    volumes:
+      - ./pruebas/resultados:/resultados
+    # datos y salida solo para reiniciar contadores y leer las estadísticas del LLM simulado
+    networks: [publica, datos, salida]
+    depends_on: [edge, unsecure]

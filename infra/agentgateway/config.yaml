@@ -1,0 +1,17 @@
+# Equivalente abierto de Agent Gateway + Agent Registry (capa 5 del ADR).
+# La lista blanca de herramientas vive aquí: lo que no esté en `rules` no se puede
+# ver ni llamar, aunque el servidor MCP lo tenga (borrar_indice, por ejemplo).
+# yaml-language-server: $schema=https://agentgateway.dev/schema/config
+gateways:
+  default:
+    port: 3000
+mcp:
+  targets:
+    - name: cursos
+      mcp:
+        host: http://mcp-cursos:8000/mcp
+  policies:
+    mcpAuthorization:
+      rules:
+        - 'mcp.tool.name == "buscar_documentos"'
+        - 'mcp.tool.name == "listar_documentos"'

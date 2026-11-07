@@ -1,0 +1,29 @@
+# Capa 6 del ADR: reemplaza a las alertas de Billing y Monitoring. El corte automático no está
+# aquí sino en el tope global del gateway (QUOTA_TOKENS_GLOBAL_DAY): llegado al tope, responde
+# 429 sin tocar el LLM.
+groups:
+  - name: consumo
+    rules:
+      - alert: PresupuestoDiarioAl80
+        expr: gateway_tokens_global_hoy / gateway_tokens_global_tope > 0.8
+        for: 10s
+        labels: { severidad: alta }
+        annotations:
+          resumen: "Se gastó más del 80% del tope diario de tokens"
+      - alert: GastoAcelerado
+        expr: sum(rate(gateway_tokens_total[1m])) * 60 > 20000
+        for: 30s
+        labels: { severidad: alta }
+        annotations:
+          resumen: "Se están gastando más de 20.000 tokens por minuto"
+      - alert: MuchosRechazos
+        expr: sum(rate(gateway_peticiones_total{resultado=~"rafaga|cuota_.*|rpm_.*|modo_ahorro"}[1m])) > 1
+        for: 30s
+        labels: { severidad: media }
+        annotations:
+          resumen: "Hay más de un rechazo por segundo: posible abuso en curso"
+      - alert: CircuitoAbierto
+        expr: gateway_circuito_abierto == 1
+        labels: { severidad: alta }
+        annotations:
+          resumen: "El gateway dejó de llamar al orquestador por fallos seguidos"

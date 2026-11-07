@@ -1,0 +1,27 @@
+# Egreso a LLMs con el proveedor simulado: para T01-T05 y para probar el failover sin gastar.
+model_list:
+  - model_name: asistente
+    litellm_params:
+      model: openai/mock-principal
+      api_base: http://mock-llm:9000/primary/v1
+      api_key: no-se-usa
+  - model_name: asistente-respaldo
+    litellm_params:
+      model: openai/mock-respaldo
+      api_base: http://mock-llm:9000/secondary/v1
+      api_key: no-se-usa
+
+router_settings:
+  num_retries: 0
+  timeout: 60
+  fallbacks:
+    - asistente: [asistente-respaldo]
+  allowed_fails: 3
+  cooldown_time: 15
+
+litellm_settings:
+  drop_params: true
+  telemetry: false
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY

@@ -1,0 +1,645 @@
+{
+  "fecha": "2026-11-07T05:47:24.749127+00:00",
+  "modelo": "qwen2.5:1.5b",
+  "preguntas": 30,
+  "respondidas": 30,
+  "correctas": 28,
+  "errores_proveedor": 0,
+  "rechazos_proveedor": 0,
+  "tokens_entrada_total": 13985,
+  "tokens_salida_total": 2336,
+  "usd_total": 0.0,
+  "truncadas": 1,
+  "tokens_total": {
+    "mediana": 538.0,
+    "p95": 904,
+    "max": 986,
+    "promedio": 544.0
+  },
+  "tokens_entrada": {
+    "mediana": 474.5,
+    "max": 815
+  },
+  "tokens_salida": {
+    "mediana": 56.5,
+    "max": 300
+  },
+  "segundos": {
+    "mediana": 0.69,
+    "p95": 2.55,
+    "max": 3.91
+  },
+  "segundos_modelo": {
+    "mediana": 0.62,
+    "p95": 2.46,
+    "max": 3.24
+  },
+  "segundos_busqueda": {
+    "mediana": 0.049,
+    "max": 0.508
+  },
+  "supuestos": {
+    "estudiantes": 40,
+    "preguntas_por_dia": 10,
+    "preguntas_por_sesion": 30,
+    "estudiantes_por_ip": 20
+  },
+  "sugerido": {
+    "TOKEN_RESERVE_PER_QUESTION": 1300,
+    "QUOTA_TOKENS_SESSION": 28000,
+    "QUOTA_TOKENS_IP_DAY": 107000,
+    "QUOTA_TOKENS_GLOBAL_DAY": 330000,
+    "QUOTA_TOKENS_IP_AHORRO": 3900
+  },
+  "filas": [
+    {
+      "pregunta": "¿Quién dicta Arquitectura de Software?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 3.91,
+      "segundos_rag": 0.508,
+      "segundos_llm": 3.24,
+      "tokens_entrada": 471,
+      "tokens_salida": 27,
+      "tokens_total": 498,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El docente que se encarga de dar la materia \"Arquitectura de Software\" es Ing. Ramírez.",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-syllabus.md",
+        "arquitectura-de-software-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿En qué salón es Arquitectura de Software?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.313,
+      "segundos_rag": 0.058,
+      "segundos_llm": 0.236,
+      "tokens_entrada": 472,
+      "tokens_salida": 9,
+      "tokens_total": 481,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "Salon: B-204",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-syllabus.md",
+        "arquitectura-de-software-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuánto vale el corte 2 de Arquitectura de Software?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.662,
+      "segundos_rag": 0.052,
+      "segundos_llm": 0.591,
+      "tokens_entrada": 477,
+      "tokens_salida": 57,
+      "tokens_total": 534,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El corte 2 (35%) de Arquitectura de Software para este curso vale 0.35 puntos en la calificación del estudio presencial al completar los tres módulos (Corte 1, Corte 2, y Final).",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-syllabus.md",
+        "arquitectura-de-software-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué es la arquitectura hexagonal?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 2.549,
+      "segundos_rag": 0.049,
+      "segundos_llm": 2.461,
+      "tokens_entrada": 470,
+      "tokens_salida": 300,
+      "tokens_total": 770,
+      "fragmentos": 3,
+      "fin": "length",
+      "correcta": true,
+      "respuesta": "La arquitectura Hexagonal, también conocida como Patrón Ports & Adapters o P&A, es un concepto en el diseño de aplicaciones software y sistema empresariales. A diferencia de las formas más tradicionales de separación del dominio del código (como MVC) que se basan casi exclusivamente en la dependencia hacia fuera, Hexagonal es más flexible. Cada componente está envuelto por él mismo, lo que permite a los componentes manejar cambios y actualizaciones.\n\nPuesto en su forma hexagonal, cada una de las partes tiene acceso a un componente externo sólo cuando lo solicita - como se llamo a las partes \"Ports\" (puertos). Estos puertos son abstracted o encapsulados, por lo que están fuera del dominio del software. Por la misma parte está el concepto de Adapters, por lo cual también se conoce como Patrón Ports & Interfaces y no patrones ports & adapters.\n\nHexagonal es designado para aplicaciones multi-módulos en las que cada componente debe mantenerse independiente de sus \"ports\" o módulos externos. Como resultado, este diseño permite que los componentes puedan ser completamente modificados sin afectar a su comportamiento y funcionalidad relacionada con los otros componentes.\n\nEn palabras más sencillas: la arquitectura Hexagonal es como si una casa tuviera puertas en todas partes",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-syllabus.md",
+        "arquitectura-de-software-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuáles son los niveles del diagrama C4?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 1.783,
+      "segundos_rag": 0.074,
+      "segundos_llm": 1.68,
+      "tokens_entrada": 793,
+      "tokens_salida": 193,
+      "tokens_total": 986,
+      "fragmentos": 5,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "Los niveles del Diagrama de Contexto C 4 se detallan así:\n\n1. Contexto  \n   Este nivel incluye información general sobre la aplicación, como su descripción y propósito.\n\n2. Contenedor (frontend)\n   Está relacionado con el comportamiento visuales en el front-end del sistema.\n\n3. Componente\n   Elementos lógicos de cada parte del proceso o funcionalidad que componen la aplicación.\n\n4. Código  \n   Límites y entorno donde el código ejecutará el software para realizar las diferentes actividades definidas.\n\nEstas 4 categorías forman una jerarquía para visualizar en un gráfico los componentes del sistema o aplica¬cación a nivel de contexto, diseño frontend, diseño backend (backend) basado en tecnologías y infraestructura (frontend), la funcionalidad del componente y el código que conformará la implementación.",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-syllabus.md",
+        "arquitectura-de-software-taller.md",
+        "matematicas-basicas-apuntes.md",
+        "matematicas-basicas-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué es un ADR?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.649,
+      "segundos_rag": 0.062,
+      "segundos_llm": 0.568,
+      "tokens_entrada": 239,
+      "tokens_salida": 56,
+      "tokens_total": 295,
+      "fragmentos": 2,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "Un ADR (Architecture Decision Record) registra por qué se tomó una decisión importante en la arquitectura de software. Es un documento que ayuda a mantenerse alineados y organizarse cuando exista cambio o debate sobre opciones diferenciadas del proyecto.",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuándo se entrega el taller de diagramas C4?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 1.413,
+      "segundos_rag": 0.062,
+      "segundos_llm": 1.332,
+      "tokens_entrada": 356,
+      "tokens_salida": 158,
+      "tokens_total": 514,
+      "fragmentos": 2,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El tiro está dirigido al curso \"Taller C4\" de Archicad. Este es un evento que busca dar conocer la metodología, estructura y aplicabilidad de las herramientas a través del dibujo de elementos simples como un archivo Archicad.\nEn esta tarea, los alumnos debían identificar los contenedores: frontend, backend y base de datos; así mismo buscar el patrón más conveniente y justificar por medio del ADR (Diagrama Funcional Dinámico Relacional) para explicar la implementación. Finalmente terminar de entregar las tareas dentro del plazo indicado, es decir a la fecha límite: previa una hora (antes del viernes 10:59pm).",
+      "fuentes": [
+        "arquitectura-de-software-syllabus.md",
+        "arquitectura-de-software-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué significa la triada CIA?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.731,
+      "segundos_rag": 0.049,
+      "segundos_llm": 0.663,
+      "tokens_entrada": 347,
+      "tokens_salida": 67,
+      "tokens_total": 414,
+      "fragmentos": 2,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "La triada CIA se refiere al conjunto de tres principios fundamentales utilizados por las organizaciones para asegurar el tratamiento, acceso e implementación de información. Estos principios son: \n\n* Confidencialidad (Conf); \n* Integridad (Inti);\n* Disponibilidad (Dis)",
+      "fuentes": [
+        "fundamentos-de-seguridad-de-la-informacion-apuntes.md",
+        "fundamentos-de-seguridad-de-la-informacion-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cómo se calcula el riesgo en seguridad de la información?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.972,
+      "segundos_rag": 0.064,
+      "segundos_llm": 0.87,
+      "tokens_entrada": 494,
+      "tokens_salida": 95,
+      "tokens_total": 589,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El riesgo en seguridad de la información es calculado multiplicando la probabilidad por el impacto. Esta operación matemática determina cuán probable y perjudicial será un evento, considerando ambos factores: los probabilidades que ocurren (por ejemplo, ¿qué tal vez sucedería si un hacker toma dominio de un servidor?) y el impacto que tendrían en términos de daño o pérdida de información.",
+      "fuentes": [
+        "fundamentos-de-seguridad-de-la-informacion-apuntes.md",
+        "fundamentos-de-seguridad-de-la-informacion-guia.md",
+        "fundamentos-de-seguridad-de-la-informacion-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué diferencia hay entre criptografía simétrica y asimétrica?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 1.991,
+      "segundos_rag": 0.051,
+      "segundos_llm": 1.923,
+      "tokens_entrada": 179,
+      "tokens_salida": 239,
+      "tokens_total": 418,
+      "fragmentos": 1,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "La principal diferencia entre criptografía simétrica (llama o cifra pública) y asimétrica (clave pública) radica en la forma de intercambio de las claves utilizadas para el encriptamiento:\n\n1. Criptografía Simétrica:\n- La misma llave se utiliza tanto para cifrar como descifrar datos\n- Algunas aplicaciones: mensajes pú褶iles, archivos comprimidos (ZIP)\n\n2. Criptografía Asimetría:\n- Claves públicas y privadas son necesarias para el encriptado/decifrado\n- Específicamente utilizado para contraseñas, autenticación remota o cifrando grandes cantantes de información\n\nOtras diferencias clave:\n- Composición: Simétrica se compone generalmente por códigos cerrados. Asimétrica es mucho más elaborada.\n- Eficiencia: La simétrica suele ser más rápida (más eficiente) en cálculos y transmite datos mayores de la asimétrica por las altas cantidades de criptografía necesaria para la conversión.",
+      "fuentes": [
+        "fundamentos-de-seguridad-de-la-informacion-apuntes.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuántos pasos tiene la guía de análisis de riesgos?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.969,
+      "segundos_rag": 0.047,
+      "segundos_llm": 0.903,
+      "tokens_entrada": 244,
+      "tokens_salida": 102,
+      "tokens_total": 346,
+      "fragmentos": 1,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "La guía de análisis de riesgos se compone de siete pasos. Estos son:\n1. Listar los activos.\n2. Identificar amenazas para cada activo.\n3. Calcular el riesgo utilizando la matriz Probabilidad × Impacto.\n4. Proporcionar controles en caso de alto riesgo.\n\nPor lo tanto, hay exactamente siete pasos en este proceso para identificar vulnerabilidades y desarrollar controles adecuados.",
+      "fuentes": [
+        "fundamentos-de-seguridad-de-la-informacion-guia.md"
+      ]
+    },
+    {
+      "pregunta": "¿Quién dicta Fundamentos de Seguridad de la Información?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.401,
+      "segundos_rag": 0.049,
+      "segundos_llm": 0.324,
+      "tokens_entrada": 495,
+      "tokens_salida": 23,
+      "tokens_total": 518,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El docente que hace el estudio sobre Fundamentos de Seguridad de la Información es Ing. Torres.",
+      "fuentes": [
+        "fundamentos-de-seguridad-de-la-informacion-apuntes.md",
+        "fundamentos-de-seguridad-de-la-informacion-guia.md",
+        "fundamentos-de-seguridad-de-la-informacion-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué entra en el corte 3 de Fundamentos de Seguridad de la Información?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.5,
+      "segundos_rag": 0.05,
+      "segundos_llm": 0.433,
+      "tokens_entrada": 359,
+      "tokens_salida": 38,
+      "tokens_total": 397,
+      "fragmentos": 2,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "En el corte 3 de Fundamentos de Seguridad de la Información, se incluirá la auditoría simbólica simulada para OWASP Top 10.",
+      "fuentes": [
+        "fundamentos-de-seguridad-de-la-informacion-apuntes.md",
+        "fundamentos-de-seguridad-de-la-informacion-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuándo fue la batalla de Boyacá?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.391,
+      "segundos_rag": 0.052,
+      "segundos_llm": 0.317,
+      "tokens_entrada": 251,
+      "tokens_salida": 25,
+      "tokens_total": 276,
+      "fragmentos": 1,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "Según los datos proporcionados, la batalla de Boyacá se celebró en 1819.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué fue el Frente Nacional?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.856,
+      "segundos_rag": 0.046,
+      "segundos_llm": 0.792,
+      "tokens_entrada": 447,
+      "tokens_salida": 82,
+      "tokens_total": 529,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El Frente Nacional se refiere a un acuerdo político firmado en 1958 entre liberales y conservadores, lo cual alternó el gobierno entre ambos partidos desde entonces. Conocido como \"Frente Catarata\", este pacto estableció cambios notables, al establecer un sistema de gobierno centralizado que se conoce como el \"eje centralístico\".",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué pasó en el Bogotazo?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 1.371,
+      "segundos_rag": 0.054,
+      "segundos_llm": 1.301,
+      "tokens_entrada": 576,
+      "tokens_salida": 145,
+      "tokens_total": 721,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "El Bogotazo fue una serie de violentas acciones aisladas que tuvieron lugar después de las manifestaciones antifascistas organizadas por Arturo Murillo y Roberto Ospina contra el régimen comunista de Rafael Guzmán Menocal. Estos descontentados políticos y militares, identificados como \"bogotanos\" (simbolismo relacionado con la ciudad), se lanzaron a luchar de manera autonómica en los barrios centro-vecinos del Centro Histórico de Bogotá bajo patrones fascistas. Los enfrentamientos causaron gran parte de la catástrofe que se conocería como el 'Bogotazo'.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué reconoció la Constitución de 1991?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.407,
+      "segundos_rag": 0.042,
+      "segundos_llm": 0.346,
+      "tokens_entrada": 581,
+      "tokens_salida": 26,
+      "tokens_total": 607,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "La Constitución de 1991 en Colombia reconoció el Estado Social de Derecho y la diversidad.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuál es el tema del ensayo del corte 1 de Historia de Colombia?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.497,
+      "segundos_rag": 0.047,
+      "segundos_llm": 0.428,
+      "tokens_entrada": 586,
+      "tokens_salida": 35,
+      "tokens_total": 621,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El tema del ensayo del corte 1 (historia reciente) es \"¿Fue la independencia de Colombia un proceso popular o de élites\"?",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuántas fuentes pide el ensayo de Historia de Colombia?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 1.512,
+      "segundos_rag": 0.056,
+      "segundos_llm": 1.44,
+      "tokens_entrada": 583,
+      "tokens_salida": 171,
+      "tokens_total": 754,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El ensayo de Historia de Colombia no solicita una cantidad específica de fuentes. Sin embargo, es generalmente recomendado tener al menos tres fuentes para poder consolidar tu argumento y aportar evidencia histórica válida.\n\nComo asistente te sugiero que:\n\n- Recuerda la estructura oficial del ensayo (introducción, desarrollo y conclusión)\n- Usa referencias al texto de historia en apreciación\n- Crea un resumen de los principios principales de la independencia \n- Explora la importancia del centroismo en la Regeneración\n- Analiza la violencia política durante los años 1940\n\nPor favor, revisa las reglas APA y las normas al finalizar tu ensayo para asegurarte de la correcta cita.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Quién dicta Historia de Colombia?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.403,
+      "segundos_rag": 0.044,
+      "segundos_llm": 0.337,
+      "tokens_entrada": 576,
+      "tokens_salida": 24,
+      "tokens_total": 600,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "Prof. Herrera / Sala D-105 / Martes y jueves 2 a 4 pm.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué es la regla de la cadena?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.943,
+      "segundos_rag": 0.044,
+      "segundos_llm": 0.872,
+      "tokens_entrada": 815,
+      "tokens_salida": 89,
+      "tokens_total": 904,
+      "fragmentos": 5,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "La regla de la cadena es un procedimiento utilizado en matemáticas para calcular las derivadas de funciones compostas. Es una ruleta que dice:\n\nd/dx[f(g(x))] = f'(g(x))·g'(x).\n\nPuesto eso, cuando has de derivar una función compuesta, simplemente debes aplicar esta regla y multiplicar la primera por la segunda derivada del \"camino\".",
+      "fuentes": [
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md",
+        "matematicas-basicas-apuntes.md",
+        "matematicas-basicas-syllabus.md",
+        "matematicas-basicas-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué mide la derivada?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.278,
+      "segundos_rag": 0.046,
+      "segundos_llm": 0.217,
+      "tokens_entrada": 553,
+      "tokens_salida": 15,
+      "tokens_total": 568,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "La derivada mide la tasa de cambio de una función.",
+      "fuentes": [
+        "matematicas-basicas-apuntes.md",
+        "matematicas-basicas-syllabus.md",
+        "matematicas-basicas-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué es la integral definida?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.978,
+      "segundos_rag": 0.049,
+      "segundos_llm": 0.909,
+      "tokens_entrada": 280,
+      "tokens_salida": 101,
+      "tokens_total": 381,
+      "fragmentos": 1,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "La integral definida calcula el área bajo una curva entre dos límites específicos. Se representa con símbolos ∫ de abajo a arriba f(x)dx y se calcula sumando los incrementos de superficie en intervalos pequeños alineados.\n\nEjemplo: ∫[f(x)] dx, donde la integral entre 2 e -2 da el área bajo la curva de f(x) entre x=2 e x=-2.",
+      "fuentes": [
+        "matematicas-basicas-apuntes.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué temas entran en el corte 2 de Matemáticas Básicas?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.463,
+      "segundos_rag": 0.047,
+      "segundos_llm": 0.394,
+      "tokens_entrada": 379,
+      "tokens_salida": 32,
+      "tokens_total": 411,
+      "fragmentos": 2,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El corte 2 de Matemáticas Básicas abarca la siguiente materia:\n\nFunciones, límites, introducción a derivadas.",
+      "fuentes": [
+        "matematicas-basicas-syllabus.md",
+        "matematicas-basicas-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuándo se entrega el taller de derivadas?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.36,
+      "segundos_rag": 0.046,
+      "segundos_llm": 0.297,
+      "tokens_entrada": 542,
+      "tokens_salida": 17,
+      "tokens_total": 559,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El taller de derivadas debe entregarse en clase el próximo miércoles.",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-syllabus.md",
+        "matematicas-basicas-syllabus.md",
+        "matematicas-basicas-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Quién dicta Matemáticas Básicas?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.353,
+      "segundos_rag": 0.043,
+      "segundos_llm": 0.293,
+      "tokens_entrada": 557,
+      "tokens_salida": 19,
+      "tokens_total": 576,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "Prof. Gómez dispone de la materia \"Matemáticas Básica\".",
+      "fuentes": [
+        "matematicas-basicas-apuntes.md",
+        "matematicas-basicas-syllabus.md",
+        "matematicas-basicas-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿En qué horario es Matemáticas Básicas?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.384,
+      "segundos_rag": 0.05,
+      "segundos_llm": 0.315,
+      "tokens_entrada": 238,
+      "tokens_salida": 27,
+      "tokens_total": 265,
+      "fragmentos": 1,
+      "fin": "stop",
+      "correcta": false,
+      "respuesta": "El curso de Matemáticas Básicas tiene varias clases. El día martes se les llama \"Corte 3\".",
+      "fuentes": [
+        "matematicas-basicas-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿Qué es MVC?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.823,
+      "segundos_rag": 0.042,
+      "segundos_llm": 0.766,
+      "tokens_entrada": 464,
+      "tokens_salida": 78,
+      "tokens_total": 542,
+      "fragmentos": 3,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "MVC es un patrón arquitectónico utilizado para dividir una aplicación en tres partes principales: el Modelo (Model), la Vista (View) y el Controlador (Controller). Este patrón separa responsabilidades entre estos diferentes elementos, permitiendo un diseño más limpio que facilita la administración y mejora la mantenibilidad de las aplicaciones.",
+      "fuentes": [
+        "arquitectura-de-software-apuntes.md",
+        "arquitectura-de-software-syllabus.md",
+        "arquitectura-de-software-taller.md"
+      ]
+    },
+    {
+      "pregunta": "¿Cuánto vale la redacción en el ensayo de Historia de Colombia?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.724,
+      "segundos_rag": 0.054,
+      "segundos_llm": 0.651,
+      "tokens_entrada": 584,
+      "tokens_salida": 65,
+      "tokens_total": 649,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "En el conjunto del ensayo de Historia de Colombia, la redacción representa 30% del peso total. Por lo tanto, esta se considera una componente crucial pero no dominante para la obtención de calificaciones, destacando además tanto en forma argumentativa como en uso de evidencia histórica.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    },
+    {
+      "pregunta": "¿En qué salón es Historia de Colombia?",
+      "estado": 200,
+      "motivo": null,
+      "segundos": 0.38,
+      "segundos_rag": 0.042,
+      "segundos_llm": 0.32,
+      "tokens_entrada": 577,
+      "tokens_salida": 21,
+      "tokens_total": 598,
+      "fragmentos": 4,
+      "fin": "stop",
+      "correcta": true,
+      "respuesta": "El salón de clases de Historia de Colombia está asignado a D-105.",
+      "fuentes": [
+        "historia-de-colombia-apuntes.md",
+        "historia-de-colombia-guia.md",
+        "historia-de-colombia-syllabus.md"
+      ]
+    }
+  ]
+}

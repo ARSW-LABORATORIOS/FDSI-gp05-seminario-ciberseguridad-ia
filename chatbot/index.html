@@ -364,6 +364,16 @@
 
     /* Caja de texto */
     .composer-wrap { padding: 8px 24px 18px; flex-shrink: 0; }
+    .verificacion {
+      max-width: 780px; margin: 0 auto 10px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      font-size: 13px; color: var(--text-2);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 14px;
+    }
+    .verificacion[hidden] { display: none; }
     .composer {
       max-width: 780px; margin: 0 auto;
       background: var(--surface);
@@ -459,7 +469,7 @@
 
   <div class="side-foot">
     <div class="status" id="status"><span class="status-dot"></span><span id="statusText">Verificando servidor…</span></div>
-    <div>Prototipo FDSI-GP-05 · sin LLM real</div>
+    <div id="modoVerificacion">Prototipo FDSI-GP-05 · sin LLM real</div>
   </div>
 </aside>
 <div class="scrim" id="scrim"></div>
@@ -481,6 +491,10 @@
   </div>
 
   <div class="composer-wrap">
+    <div class="verificacion" id="verificacion" hidden>
+      <span>Comprobando que no eres un bot. Es automático y no sale de este servidor.</span>
+      <div id="verificacionWidget"></div>
+    </div>
     <form class="composer" id="form">
       <label for="input" class="sr-only">Escribe tu pregunta</label>
       <textarea id="input" rows="1" maxlength="500" placeholder="Pregunta por un syllabus, apuntes, taller o guía…"></textarea>
@@ -704,17 +718,96 @@
         } catch {}
       };
     } else {
-      // respuesta sin documento (o backend viejo que solo manda "answer")
+      // respuesta del LLM (infra/) o sin documento: texto libre, con sus fuentes si las hay
       const text = data.answer || 'No obtuve respuesta del servidor.';
-      botShell(`<div class="bot-text">${text.split('\n').filter(Boolean).map(p => `<p>${bold(esc(p))}</p>`).join('')}</div><div class="meta">${now()}</div>`);
+      const fuentes = (data.fuentes || []).map(f => `<span class="fact">${esc(f.replace(/\.md$/, '').replace(/-/g, ' '))}</span>`).join('');
+      const detalle = data.de_cache ? '<span>Desde caché · 0 tokens</span>'
+        : data.tokens_total ? `<span>${data.tokens_total} tokens</span>` : '';
+      // un modelo real responde con viñetas de Markdown; sin esto se ve el asterisco tal cual
+      botShell(`<div class="bot-text">${text.split('\n').filter(Boolean).map(p => `<p>${bold(esc(p.replace(/^\s*[*-]\s+/, '• ')))}</p>`).join('')}</div>
+        ${fuentes ? `<div class="facts">${fuentes}</div>` : ''}
+        <div class="meta"><span>${now()}</span>${detalle}</div>`);
     }
   }
 
-  function addError(retryText) {
+  function addError(retryText, mensaje = 'No pude conectar con el servidor. Revisa que el backend siga corriendo.', conReintento = true) {
     const el = botShell(`
-      <div class="error-card">${icon('alert', 18)}<span>No pude conectar con el servidor. Revisa que el backend siga corriendo.</span>
-      <button type="button">Reintentar</button></div>`);
-    el.querySelector('button').onclick = () => { el.remove(); send(retryText, { silent: true }); };
+      <div class="error-card">${icon('alert', 18)}<span>${esc(mensaje)}</span>
+      ${conReintento ? '<button type="button">Reintentar</button>' : ''}</div>`);
+    if (conReintento) el.querySelector('button').onclick = () => { el.remove(); send(retryText, { silent: true }); };
+  }
+
+  // ── sesión anónima (solo con infra/; el prototipo no tiene /config) ──
+  let usaSesion = false, tokenSesion = null, sesionPendiente = null;
+
+  function mostrarVerificacion() {
+    return new Promise((resolve, reject) => {
+      $('verificacion').hidden = false;
+      const widget = document.createElement('altcha-widget');
+      widget.setAttribute('challenge', '/altcha/challenge');
+      widget.setAttribute('language', 'es');
+      widget.setAttribute('auto', 'onload');
+      widget.setAttribute('hidefooter', '');
+      widget.setAttribute('hidelogo', '');
+      widget.addEventListener('statechange', async e => {
+        if (e.detail.state !== 'verified') return;
+        try {
+          resolve(await pedirSesion({ altcha: e.detail.payload }));
+          $('verificacion').hidden = true;
+          widget.remove();
+        } catch (err) { reject(err); }
+      });
+      $('verificacionWidget').replaceChildren(widget);
+    });
+  }
+
+  async function pedirSesion(cuerpo) {
+    const res = await fetch('/session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(cuerpo),
+    });
+    if (!res.ok) throw new Error(await mensajeDeError(res));
+    return (await res.json()).token;
+  }
+
+  async function mensajeDeError(res) {
+    try { return (await res.json()).detail.mensaje || 'El servidor rechazó la petición.'; }
+    catch { return res.status === 403 ? 'El firewall bloqueó esa petición.' : 'El servidor rechazó la petición.'; }
+  }
+
+  // varias preguntas seguidas comparten la misma verificación en curso
+  async function asegurarSesion() {
+    if (!usaSesion || tokenSesion) return;
+    sesionPendiente ??= (config.captcha_enabled ? mostrarVerificacion() : pedirSesion({}))
+      .then(t => { tokenSesion = t; })
+      .finally(() => { sesionPendiente = null; });
+    await sesionPendiente;
+  }
+
+  let config = {};
+  async function cargarConfig() {
+    try {
+      const res = await fetch('/config', { cache: 'no-store' });
+      if (!res.ok) return;
+      config = await res.json();
+      usaSesion = true;
+      $('modoVerificacion').textContent = config.captcha_enabled ? 'Verificación anti-bots activa' : 'Verificación anti-bots apagada';
+      if (config.captcha_enabled) {
+        const script = document.createElement('script');
+        script.type = 'module';
+        script.src = '/vendor/altcha.i18n.min.js';
+        document.head.appendChild(script);
+        asegurarSesion().catch(() => {});
+      }
+    } catch {}
+  }
+
+  async function llamarAsistente(msg) {
+    await asegurarSesion();
+    const cabeceras = { 'Content-Type': 'application/json' };
+    if (tokenSesion) cabeceras.Authorization = `Bearer ${tokenSesion}`;
+    return fetch('/ask', { method: 'POST', headers: cabeceras, body: JSON.stringify({ message: msg }) });
   }
 
   async function send(text, { silent = false } = {}) {
@@ -732,19 +825,23 @@
     const typing = addTyping();
     const t0 = performance.now();
     try {
-      const res = await fetch('/ask', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: msg }),
-      });
-      if (!res.ok) throw new Error(res.status);
-      const data = await res.json();
+      let res = await llamarAsistente(msg);
+      if (res.status === 401 && usaSesion) {  // la sesión venció: se pide otra una sola vez
+        tokenSesion = null;
+        res = await llamarAsistente(msg);
+      }
       // pausa mínima para que el indicador de escritura no parpadee
       await new Promise(r => setTimeout(r, Math.max(0, 450 - (performance.now() - t0))));
       typing.remove();
-      addAnswer(data);
       setStatus(true);
-    } catch {
+      if (res.ok) {
+        addAnswer(await res.json());
+      } else {
+        // un rechazo por cuota o por el filtro no es un fallo: reintentar igual no sirve
+        const reintentable = res.status >= 500 || res.headers.get('Retry-After') === '5' || res.headers.get('Retry-After') === '10';
+        addError(msg, await mensajeDeError(res), reintentable);
+      }
+    } catch (err) {
       typing.remove();
       addError(msg);
       setStatus(false);
@@ -790,6 +887,7 @@
   fitPlaceholder();
 
   renderWelcome();
+  cargarConfig();
   ping();
   setInterval(ping, 20000);
   input.focus();

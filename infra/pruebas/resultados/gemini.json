@@ -1,0 +1,293 @@
+{
+  "fecha": "2026-11-07T04:58:57.530182+00:00",
+  "modelo": "gemini-3.5-flash-lite",
+  "captcha": true,
+  "segundos": 60.0,
+  "segundos_t04": 120.0,
+  "segundos_t05": 180.0,
+  "estudiantes": 3,
+  "intervalo_estudiante": 20.0,
+  "spike": "3/30s",
+  "completa": true,
+  "T04": {
+    "unsecure": {
+      "ips": 30,
+      "peticiones": 3390,
+      "ok": 68,
+      "pct_429": 98.0,
+      "sesiones_abiertas": 0,
+      "motivos": {
+        "http_429": 3321,
+        "http_502": 1
+      },
+      "estudiante_despues": null,
+      "estudiante_durante_pct_exito": 0.0,
+      "estudiante_durante_preguntas": 6,
+      "estudiante_durante_motivos": {
+        "http_429": 6
+      },
+      "estudiante_durante_p95_s": 0.0,
+      "llamadas_llm": 68,
+      "tokens": 121018,
+      "tokens_entrada": 117138,
+      "tokens_salida": 3880,
+      "usd": 0.044841,
+      "intentos": 3395,
+      "en_curso": 0,
+      "rechazos_proveedor": 3327,
+      "errores_proveedor": 0,
+      "truncadas": 0,
+      "vacias": 0,
+      "segundos_modelo": 232.361,
+      "modelo": "gemini-3.5-flash-lite",
+      "cuota_dia_agotada": false,
+      "golpes_al_proveedor": 211
+    },
+    "secure": {
+      "ips": 30,
+      "peticiones": 1015,
+      "ok": 23,
+      "pct_429": 76.0,
+      "sesiones_abiertas": 600,
+      "motivos": {
+        "rpm_global": 221,
+        "rafaga": 183,
+        "rpm_ip": 588
+      },
+      "estudiante_despues": 200,
+      "estudiante_durante_pct_exito": 66.7,
+      "estudiante_durante_preguntas": 6,
+      "estudiante_durante_motivos": {
+        "rpm_global": 2
+      },
+      "estudiante_durante_p95_s": 6.391,
+      "llamadas_llm": 27,
+      "tokens": 10969,
+      "tokens_entrada": 10069,
+      "tokens_salida": 900,
+      "usd": 0.005271,
+      "intentos": 27,
+      "en_curso": 0,
+      "rechazos_proveedor": 0,
+      "errores_proveedor": 0,
+      "truncadas": 0,
+      "vacias": 0,
+      "segundos_modelo": 47.436,
+      "modelo": "gemini-3.5-flash-lite",
+      "cuota_dia_agotada": false,
+      "golpes_al_proveedor": 238
+    }
+  },
+  "T05": {
+    "unsecure": {
+      "estudiantes": 3,
+      "muestras_sin_ataque": 26,
+      "muestras_con_ataque": 0,
+      "preguntas_con_ataque": 27,
+      "de_cache_con_ataque": 0,
+      "sin_ataque_mediana_s": 2.327,
+      "con_ataque_mediana_s": 0.0,
+      "sin_ataque_p95_s": 5.2,
+      "con_ataque_p95_s": 0.0,
+      "con_ataque_max_s": 0.0,
+      "veces_mas_lento_p95": 0.0,
+      "sin_ataque_pct_exito": 100.0,
+      "motivos_sin_ataque": {},
+      "con_ataque_pct_exito": 0.0,
+      "motivos_estudiante": {
+        "http_429": 27
+      },
+      "peticiones_atacante": 5116,
+      "motivos_atacante": {
+        "http_429": 5042
+      },
+      "llamadas_llm": 74,
+      "tokens": 130723,
+      "tokens_entrada": 127461,
+      "tokens_salida": 3262,
+      "usd": 0.046393,
+      "intentos": 5143,
+      "en_curso": 0,
+      "rechazos_proveedor": 5069,
+      "errores_proveedor": 0,
+      "truncadas": 0,
+      "vacias": 0,
+      "segundos_modelo": 209.169,
+      "modelo": "gemini-3.5-flash-lite",
+      "cuota_dia_agotada": false,
+      "golpes_al_proveedor": 345
+    },
+    "secure": {
+      "estudiantes": 3,
+      "muestras_sin_ataque": 27,
+      "muestras_con_ataque": 27,
+      "preguntas_con_ataque": 27,
+      "de_cache_con_ataque": 0,
+      "sin_ataque_mediana_s": 1.415,
+      "con_ataque_mediana_s": 1.269,
+      "sin_ataque_p95_s": 4.361,
+      "con_ataque_p95_s": 2.403,
+      "con_ataque_max_s": 2.916,
+      "veces_mas_lento_p95": 0.6,
+      "sin_ataque_pct_exito": 100.0,
+      "motivos_sin_ataque": {},
+      "con_ataque_pct_exito": 100.0,
+      "motivos_estudiante": {},
+      "peticiones_atacante": 86088,
+      "motivos_atacante": {
+        "rafaga": 1802,
+        "limite_borde": 84268,
+        "rpm_global": 9,
+        "rpm_ip": 6
+      },
+      "llamadas_llm": 30,
+      "tokens": 12377,
+      "tokens_entrada": 11675,
+      "tokens_salida": 702,
+      "usd": 0.005258,
+      "intentos": 30,
+      "en_curso": 0,
+      "rechazos_proveedor": 0,
+      "errores_proveedor": 0,
+      "truncadas": 0,
+      "vacias": 0,
+      "segundos_modelo": 39.518,
+      "modelo": "gemini-3.5-flash-lite",
+      "cuota_dia_agotada": false,
+      "golpes_al_proveedor": 402
+    }
+  },
+  "T02": {
+    "unsecure": {
+      "repeticiones": 5,
+      "estados_masiva": {
+        "200": 5
+      },
+      "tokens_entrada_masiva": 1726,
+      "tokens_salida_masiva": 9,
+      "tokens_salida_min_max": [
+        8,
+        11
+      ],
+      "fragmentos": 15,
+      "tokens_totales_masiva": 1735,
+      "estado_prompt_gigante": 200,
+      "tokens_prompt_gigante": 3403,
+      "usd": 0.003827
+    },
+    "secure": {
+      "repeticiones": 5,
+      "estados_masiva": {
+        "200": 4,
+        "429": 1
+      },
+      "tokens_entrada_masiva": 566,
+      "tokens_salida_masiva": 296,
+      "tokens_salida_min_max": [
+        296,
+        296
+      ],
+      "fragmentos": 4,
+      "tokens_totales_masiva": 862,
+      "estado_prompt_gigante": 400,
+      "tokens_prompt_gigante": 0,
+      "usd": 0.003639
+    }
+  },
+  "T03": {
+    "unsecure": {
+      "aciertos_repetida": "0/4",
+      "aciertos_reformulada": "0/3",
+      "latencia_primera_s": 1.061,
+      "latencia_repetida_s": 0.91,
+      "llamadas_llm": 8,
+      "tokens": 14038,
+      "tokens_entrada": 13728,
+      "tokens_salida": 310,
+      "usd": 0.004893,
+      "intentos": 8,
+      "en_curso": 0,
+      "rechazos_proveedor": 0,
+      "errores_proveedor": 0,
+      "truncadas": 0,
+      "vacias": 0,
+      "segundos_modelo": 7.182,
+      "modelo": "gemini-3.5-flash-lite",
+      "cuota_dia_agotada": false,
+      "golpes_al_proveedor": 413
+    },
+    "secure": {
+      "aciertos_repetida": "4/4",
+      "aciertos_reformulada": "3/3",
+      "latencia_primera_s": 1.937,
+      "latencia_repetida_s": 0.017,
+      "llamadas_llm": 1,
+      "tokens": 669,
+      "tokens_entrada": 633,
+      "tokens_salida": 36,
+      "usd": 0.00028,
+      "intentos": 1,
+      "en_curso": 0,
+      "rechazos_proveedor": 0,
+      "errores_proveedor": 0,
+      "truncadas": 0,
+      "vacias": 0,
+      "segundos_modelo": 1.849,
+      "modelo": "gemini-3.5-flash-lite",
+      "cuota_dia_agotada": false,
+      "golpes_al_proveedor": 414
+    }
+  },
+  "T01": {
+    "unsecure": {
+      "peticiones": 1686,
+      "ok": 41,
+      "pct_429": 97.6,
+      "motivos": {
+        "http_429": 1645
+      },
+      "llamadas_llm": 41,
+      "tokens": 73200,
+      "tokens_entrada": 70615,
+      "tokens_salida": 2585,
+      "usd": 0.027647,
+      "intentos": 1686,
+      "en_curso": 0,
+      "rechazos_proveedor": 1645,
+      "errores_proveedor": 0,
+      "truncadas": 0,
+      "vacias": 0,
+      "segundos_modelo": 49.958,
+      "modelo": "gemini-3.5-flash-lite",
+      "cuota_dia_agotada": false,
+      "golpes_al_proveedor": 463
+    },
+    "secure": {
+      "peticiones": 28302,
+      "ok": 4,
+      "pct_429": 100.0,
+      "motivos": {
+        "rafaga": 614,
+        "limite_borde": 27682,
+        "rpm_ip": 2
+      },
+      "llamadas_llm": 4,
+      "tokens": 1524,
+      "tokens_entrada": 1399,
+      "tokens_salida": 125,
+      "usd": 0.000732,
+      "intentos": 4,
+      "en_curso": 0,
+      "rechazos_proveedor": 0,
+      "errores_proveedor": 0,
+      "truncadas": 0,
+      "vacias": 0,
+      "segundos_modelo": 16.111,
+      "modelo": "gemini-3.5-flash-lite",
+      "cuota_dia_agotada": false,
+      "golpes_al_proveedor": 467
+    }
+  },
+  "total_golpes_al_proveedor": 467,
+  "nota_T02": "T02 repetida después con varias muestras, misma configuración: una sola muestra no sirve porque la salida del modelo varía"
+}

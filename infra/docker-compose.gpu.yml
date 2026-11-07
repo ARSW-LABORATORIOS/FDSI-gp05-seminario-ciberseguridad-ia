@@ -1,0 +1,4 @@
+# Se agrega con -f para que Ollama use una tarjeta NVIDIA.
+services:
+  ollama:
+    gpus: all
